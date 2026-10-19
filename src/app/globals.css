@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Design tokens: tweak the palette here, components only use the semantic names. */
+:root {
+  --paper: #f3f3ef;
+  --paper-2: #e9e9e3;
+  --card: #ffffff;
+  --ink: #151514;
+  --ink-2: #3a3a37;
+  --muted: #6e6e68;
+  --line: rgb(21 21 20 / 0.1);
+  --accent: #3a9d5d;
+  --accent-ink: #23693c;
+  --note: #fff3b0;
+  --folder: #6cb2f2;
+  --folder-back: #4a97e3;
+  --terminal: #121413;
+  --terminal-ink: #d4f2dc;
+  --terminal-muted: #7f9686;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-note: var(--note);
+  --color-folder: var(--folder);
+  --color-folder-back: var(--folder-back);
+  --color-terminal: var(--terminal);
+  --color-terminal-ink: var(--terminal-ink);
+  --color-terminal-muted: var(--terminal-muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* Keep anchored sections clear of the sticky menu bar. */
+[id] {
+  scroll-margin-top: 4rem;
+}
+
+.dot-grid {
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
