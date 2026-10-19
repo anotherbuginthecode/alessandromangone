@@ -16,7 +16,8 @@ export function CaseCover({ cover, priority }: CaseCoverProps) {
             width={393}
             height={852}
             aria-hidden
-            className="pointer-events-none absolute -top-10 -right-6 w-2/5 opacity-90 select-none"
+            // The shapes run off the art's edges; the mask fades them out instead of cutting them on a straight line.
+            className="pointer-events-none absolute -top-10 -right-6 w-2/5 opacity-90 select-none mask-x-from-70% mask-y-from-80%"
           />
         )}
         <BrowserFrame src={cover.src} alt={cover.alt} url={cover.url} priority={priority} className="relative w-[88%]" />
@@ -51,8 +52,8 @@ export function CaseCover({ cover, priority }: CaseCoverProps) {
   }
 
   return (
-    <div className="grid aspect-[4/3] place-items-center rounded-2xl border border-white/10 bg-white/5">
-      <span className="text-7xl font-semibold tracking-tight text-[var(--cs-accent)] sm:text-8xl">{cover.label}</span>
+    <div className="grid aspect-video place-items-center rounded-2xl border border-white/10 bg-white/5">
+      <span className="text-7xl font-semibold tracking-tight text-[var(--cs-accent)] sm:text-9xl">{cover.label}</span>
     </div>
   );
 }

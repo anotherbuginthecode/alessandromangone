@@ -47,9 +47,9 @@ export function ScreenBoard({ screens, caption }: { screens: Screen[]; caption?:
   );
 
   return (
-    <figure ref={ref} data-self-animated className="my-14 lg:-mx-24">
+    <figure ref={ref} data-self-animated className="my-14">
       <div className="dot-grid-dark rounded-3xl bg-[var(--cs-bg)] px-4 py-10 sm:px-8 sm:py-14">
-        <ul className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 md:grid md:grid-cols-3 md:gap-x-6 md:gap-y-12 md:overflow-visible md:pb-0">
+        <ul className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 md:mx-auto md:grid md:max-w-4xl md:grid-cols-3 md:gap-x-6 md:gap-y-12 md:overflow-visible md:pb-0">
           {screens.map((screen) => (
             <li key={screen.src} data-screen className="w-[62%] shrink-0 snap-center md:w-auto">
               <Image
@@ -57,7 +57,7 @@ export function ScreenBoard({ screens, caption }: { screens: Screen[]; caption?:
                 alt={screen.alt}
                 width={600}
                 height={1298}
-                sizes="(min-width: 768px) 30vw, 62vw"
+                sizes="(min-width: 1024px) 280px, (min-width: 768px) 30vw, 62vw"
                 className="h-auto w-full rounded-[1.4rem] shadow-2xl ring-1 ring-white/10"
               />
               <p className="mt-3 text-sm leading-snug text-white/70">{screen.caption}</p>
@@ -65,7 +65,7 @@ export function ScreenBoard({ screens, caption }: { screens: Screen[]; caption?:
           ))}
         </ul>
       </div>
-      {caption && <figcaption className="mt-3 text-sm text-muted">{caption}</figcaption>}
+      {caption && <figcaption className="mt-3 text-[13px] text-muted">{caption}</figcaption>}
     </figure>
   );
 }

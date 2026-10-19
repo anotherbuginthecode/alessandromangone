@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CaseHero, themeStyle } from "@/components/case-study/case-hero";
+import { StatsPanel } from "@/components/case-study/blocks";
+import { CaseHeader } from "@/components/case-study/case-header";
 import { ReadingProgress } from "@/components/motion/reading-progress";
 import { Reveal } from "@/components/motion/reveal";
 import { getCaseStudies, getCaseStudy, listCaseStudySlugs } from "@/lib/content";
-import { brandFonts } from "@/lib/fonts";
+import { themeStyle } from "@/lib/theme";
 
 export function generateStaticParams() {
   return listCaseStudySlugs().map((slug) => ({ slug }));
@@ -29,10 +30,15 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   return (
     <article style={themeStyle(meta.theme)}>
       <ReadingProgress />
-      <CaseHero meta={meta} />
+      <CaseHeader meta={meta} />
 
-      <Reveal className="mx-auto max-w-3xl px-4 pt-4 pb-24">
+      <Reveal className="mx-auto max-w-6xl px-4 pt-4 pb-24">
         <Content />
+        {meta.stats && (
+          <div className="mt-20">
+            <StatsPanel stats={meta.stats} />
+          </div>
+        )}
       </Reveal>
 
       {next && next.slug !== slug && (
@@ -44,11 +50,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           <div className="mx-auto flex max-w-6xl items-end justify-between gap-6 px-4 py-16 sm:py-20">
             <div>
               <p className="font-mono text-xs uppercase opacity-60">Next case study</p>
-              <p
-                className={`${next.meta.theme.font ? brandFonts[next.meta.theme.font] : ""} mt-2 text-5xl font-extrabold tracking-tight sm:text-7xl`}
-              >
-                {next.meta.title}
-              </p>
+              <p className="mt-2 text-5xl font-semibold tracking-tighter sm:text-7xl">{next.meta.title}</p>
             </div>
             <span className="text-5xl text-[var(--cs-accent)] transition-transform group-hover:translate-x-2" aria-hidden>
               →

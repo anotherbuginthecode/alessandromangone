@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CaseCover } from "@/components/case-study/case-cover";
-import { themeStyle } from "@/components/case-study/case-hero";
+import { themeStyle } from "@/lib/theme";
 import { PosterReveal } from "@/components/motion/poster-reveal";
 import type { CaseStudyMeta, Entry } from "@/lib/content";
 import { brandFonts } from "@/lib/fonts";

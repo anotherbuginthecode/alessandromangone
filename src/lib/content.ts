@@ -24,6 +24,8 @@ export type Stat = { value: number; label: string; prefix?: string; suffix?: str
 export type CaseStudyMeta = {
   title: string;
   summary: string;
+  // Longer opening for the case study header; posters use `summary`.
+  intro?: string;
   year: string;
   role: string;
   team?: string;

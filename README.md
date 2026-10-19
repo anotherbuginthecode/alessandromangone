@@ -42,7 +42,7 @@ Reference analysis (in Italian): [`docs/analisi-riferimenti.md`](docs/analisi-ri
 ### Conventions
 
 - **Placeholders.** A value in `[brackets]` in `site.ts` is a placeholder. The UI hides it (dock icon, footer link, status line) until it holds a real value.
-- **Case studies.** Each MDX file exports `metadata` with `theme` (colors and optional brand font), `cover` and `stats`. Adding a file adds a desktop folder, a poster and a page.
+- **Case studies.** Each MDX file exports `metadata` with `intro`, `theme` (colors and an optional brand font for the poster), `cover` and `stats`. The page closes with `stats` in a results panel. The body is Markdown plus the blocks registered in `src/mdx-components.tsx`: `Cards`, `Steps`, `Principles` and the animated figures. Adding a file adds a desktop folder, a poster and a page.
 - **Posts.** Set `draft: true` to keep a post out of every list. The Blog link, folder and section appear with the first published post.
 
 ## Develop

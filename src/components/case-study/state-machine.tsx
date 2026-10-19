@@ -34,7 +34,7 @@ export function StateMachine({ states, exits = [], caption }: StateMachineProps)
   );
 
   return (
-    <figure ref={ref} data-self-animated className="my-12 rounded-2xl border border-line bg-card p-5 sm:p-8">
+    <figure ref={ref} data-self-animated className="my-14 rounded-3xl border border-line bg-card p-5 sm:p-10">
       <div className="relative">
         <span className="absolute top-2 bottom-2 left-[7px] w-0.5 bg-paper-2" aria-hidden />
         <span data-rail className="absolute top-2 bottom-2 left-[7px] w-0.5 bg-accent" aria-hidden />
@@ -63,7 +63,7 @@ export function StateMachine({ states, exits = [], caption }: StateMachineProps)
           </ul>
         </div>
       )}
-      {caption && <figcaption className="mt-5 text-sm text-muted">{caption}</figcaption>}
+      {caption && <figcaption className="mt-6 text-[13px] text-muted">{caption}</figcaption>}
     </figure>
   );
 }

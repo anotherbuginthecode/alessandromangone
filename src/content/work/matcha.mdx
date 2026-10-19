@@ -1,6 +1,8 @@
 export const metadata = {
   title: "Matcha",
   summary: "A dating app that turns every match into a real date. Both people pay €10, pick their free evenings, and Matcha books the table.",
+  intro:
+    "A dating app for Milan that turns every match into a real date: both people pay €10, pick their free evenings, and Matcha books the table. I co-founded it and own the architecture, the code and the way it ships.",
   year: "2026",
   role: "Co-founder & CTO",
   team: "3 co-founders + coding agents",
@@ -17,11 +19,12 @@ export const metadata = {
     art: "/work/matcha/splash.webp",
   },
   stats: [
-    { value: 121, label: "pull requests merged" },
-    { value: 78, suffix: "%", label: "opened by coding agents" },
-    { value: 25, label: "server functions" },
-    { value: 111, label: "database migrations" },
+    { value: 121, label: "pull requests merged in 16 weeks" },
+    { value: 78, suffix: "%", label: "of pull requests opened by agents" },
+    { value: 70, suffix: "%", label: "of commits co-authored by an agent" },
     { value: 20, label: "architecture decisions on record" },
+    { value: 111, label: "database migrations" },
+    { value: 25, label: "server functions" },
   ],
 };
 
@@ -29,17 +32,15 @@ export const metadata = {
 
 Most dating apps measure success in messages. Matcha measures it in dates that actually happen. Two people like each other, each pays €10, which covers a drink, each picks the evenings they are free, and Matcha books a table at a partner venue in Milan. A short chat opens two hours before the date and closes an hour after it. There is no endless chat to get lost in.
 
-I co-founded Matcha with two partners. I own everything technical: the architecture, the code and the way it gets delivered.
-
 ## Real money, strangers meeting in person, no backend team
 
 A dating app that ends at a real table carries more weight than a chat app. From the first release we needed:
 
-- Payments that become real only when the payment provider says so.
-- Two people's free evenings matched without either one seeing the other's.
-- Identity checks, reports, blocks and moderation, because strangers meet face to face.
-- A venue network run by one person, without building a custom CRM.
-- All of it shipped by one engineer and a board of coding agents.
+- **Payments that count.** A match is paid only when the payment provider says so, never because the app claims it.
+- **Private availability.** Two people's free evenings are matched without either one seeing the other's.
+- **Safety from day one.** Identity checks, reports, blocks and moderation, because strangers meet face to face.
+- **A venue network run by one person.** Bookings and reports need a work queue, not a custom CRM.
+- **One engineer and a board of agents.** All of it ships without a backend team.
 
 ## The app may express intent. Only the server records facts.
 
@@ -79,6 +80,7 @@ The mobile app is a thin client built with Expo and React Native. It has no back
     },
   ]}
   links={["intent: like, pay, pick evenings", "webhooks in, calls out", "alerts out, buttons in"]}
+  caption="The architecture in four layers. The app talks only to Supabase, and Edge Functions are the one door to everything outside."
 />
 
 ## A match is a state machine, not a conversation
@@ -95,6 +97,7 @@ Every match moves through a fixed set of states, and the app writes none of them
     { label: "Completed", note: "Feedback opens. A no-show earns the other person a free date." },
   ]}
   exits={["Expired: no payment, no overlap or no venue", "Cancelled: by a user or after a report", "No-show: reported within 24 hours"]}
+  caption="The life of a match. A payment, the database, an operator or a scheduled job moves each step; the app moves none."
 />
 
 ## Manual first, on purpose
@@ -103,28 +106,87 @@ The first design had an algorithm that rotated venues, with availability tables 
 
 Airtable is the operators' work queue. A button on a row calls the server to confirm a booking or act on a report, and that call is what moves the match forward. Slack is the alarm bell when money or safety needs a human. The algorithm is deferred, not deleted: it gets built when the number of venues and dates justifies it.
 
-## Built by a board, reviewed by people
+## What I own
 
-Matcha is mostly written by coding agents working a GitHub board. A short file in the repository, `AGENTS.md`, sets the rules: every issue carries one area label and one autonomy label, and the label decides how far an agent can go alone.
+There is no backend team. Every layer below is mine to design, and coding agents write most of the code under rules I set.
+
+<Cards
+  items={[
+    {
+      title: "Architecture",
+      body: "One Postgres database as the source of truth, access rules enforced by the database, and 20 decision records that explain the choices behind it.",
+    },
+    {
+      title: "Mobile app",
+      body: "A thin Expo and React Native client for iOS and Android. It sends intent and shows state; it never decides an outcome.",
+    },
+    {
+      title: "Payments and safety",
+      body: "Payment webhooks move a match forward. Identity checks, reports and blocks are handled on the server, and moderation decisions go to a person.",
+    },
+    {
+      title: "Operations",
+      body: "Airtable as the operators' work queue and Slack as the alarm bell. A button on a row calls the server, and that call moves the match.",
+    },
+    {
+      title: "Coding agents",
+      body: "A GitHub board with an area label and an autonomy label on every issue. The label decides how far an agent can go alone.",
+    },
+    {
+      title: "Quality",
+      body: "Linting, type checks and unit tests on every pull request, then every migration applied to a test project and an end-to-end suite run against it.",
+    },
+  ]}
+/>
+
+## From issue to merged pull request
+
+Matcha is mostly written by coding agents working a GitHub board. A short file in the repository, `AGENTS.md`, sets the rules for every step.
 
 <Quote source="AGENTS.md">A task is ready when a new agent can finish it without asking product or technical questions.</Quote>
 
+<Steps
+  items={[
+    {
+      title: "Write the issue until it is ready",
+      body: "Ambiguous acceptance criteria or a missing decision send it back. The issue gets fixed before it gets a label.",
+    },
+    {
+      title: "Label the risk",
+      body: "Every issue gets one area label and one autonomy label. A written rubric decides the autonomy, and the first matching rule wins.",
+    },
+    {
+      title: "Plan before code when it matters",
+      body: "On a supervised issue the agent posts its plan as a comment and stops. It writes code only after the repository owner replies “Approved”.",
+    },
+    {
+      title: "Build with proof",
+      body: "Each pull request delivers one focused outcome. Logic changes come with tests for the changed behaviour and its failure paths.",
+    },
+    {
+      title: "Review, then merge",
+      body: "An independent review must approve and CI must be green. The agent merges auto issues itself; a person merges supervised ones.",
+    },
+  ]}
+/>
+
 <AgentBoard />
 
-The classification is a rubric, and the first match wins. An issue is supervised when it touches authentication, the database schema, money or personal data, security settings, deployment, a published API contract, untrusted content, anything a revert cannot undo, or when it is the first of its kind and sets a pattern others will copy. Everything else runs on auto. An agent may raise an issue from auto to supervised, never the other way round. When it is stuck, it writes the problem, the options and a recommendation, flags the issue for a human and stops.
+An issue is supervised when it touches authentication, the database schema, money or personal data, security settings, deployment, a published API contract, untrusted content, anything a revert cannot undo, or when it is the first of its kind and sets a pattern others will copy. Everything else runs on auto. In the first 16 weeks, 29 issues were gated as supervised and 17 ran fully on auto. An agent may raise an issue from auto to supervised, never the other way round. When it is stuck, it writes the problem, the options and a recommendation, flags the issue for a human and stops.
 
-Two things keep the agents honest. The decision records and the architecture document carry context from one session to the next, and agents update them when they change ownership, data or trust boundaries. Continuous integration runs linting, type checks and unit tests on every pull request, then applies every migration to a separate test project and runs an end-to-end suite against it.
+## The principles behind it
 
-## What the board delivered
-
-<Metrics
+<Principles
   items={[
-    { value: 121, label: "pull requests merged in 16 weeks" },
-    { value: 78, suffix: "%", label: "of pull requests opened by agent sessions" },
-    { value: 70, suffix: "%", label: "of commits co-authored by an agent" },
-    { value: 29, label: "issues gated as supervised" },
-    { value: 17, label: "issues run fully on auto" },
-    { value: 20, label: "architecture decision records" },
+    { title: "The server records facts", body: "The app sends intent. Payments, statuses, credits and suspensions are written only by the server." },
+    { title: "Manual first", body: "A person does the job until the volume justifies software. The venue algorithm waits for real data." },
+    { title: "Commit before you choose", body: "Paying comes before picking evenings, so only the matches people mean to keep reach the calendar." },
+    { title: "Chat around the date", body: "The chat opens two hours before the date and closes an hour after. It serves the date, not the other way round." },
+    { title: "Risk sets autonomy", body: "The label, not the prompt, decides how far an agent goes alone. Agents may raise it, never lower it." },
+    {
+      title: "Decisions in writing",
+      body: "Decision records and the architecture document carry the reasoning between sessions. Agents update them when ownership, data or trust boundaries change.",
+    },
   ]}
 />
 

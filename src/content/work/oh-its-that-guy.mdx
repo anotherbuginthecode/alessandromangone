@@ -1,6 +1,8 @@
 export const metadata = {
   title: "Oh It's That Guy!",
   summary: "A serverless quiz game about character actors. You know the face; can you name the movie?",
+  intro:
+    "A serverless quiz game about character actors: you know the face, can you name the movie? I built it alone in a week of evenings with production rules, and came back months later with coding agents to audit it.",
   year: "2025",
   role: "Solo builder",
   team: "Me, and later a few agents",
@@ -16,10 +18,11 @@ export const metadata = {
   },
   stats: [
     { value: 7, label: "days from first commit to production" },
-    { value: 4, label: "Lambda functions, read only" },
     { value: 97, label: "commits, almost all by hand" },
-    { value: 2, label: "game modes" },
     { value: 5, label: "audit reports written by agents" },
+    { value: 4, label: "Lambda functions behind one API" },
+    { value: 2, label: "game modes" },
+    { value: 30, label: "seconds on the clock in Standard mode" },
   ],
 };
 
@@ -69,16 +72,16 @@ The game is built for a phone held in one hand, in the few seconds you would oth
 
 ## A side project with production rules
 
-I built it alone, in the evenings. That was not a reason to cut corners. The game had to:
+I built it alone, in the evenings. That was not a reason to cut corners. The game had to meet four rules:
 
-- Cost close to nothing when nobody is playing.
-- Answer fast from anywhere, on a phone first.
-- Be rebuilt from scratch with infrastructure as code.
-- Deploy on every push, with no manual steps for the client.
+- **Near-zero idle cost.** It costs close to nothing when nobody is playing.
+- **Fast on a phone.** It answers quickly from anywhere, mobile first.
+- **Rebuildable.** All the infrastructure is code, so it can be recreated from scratch.
+- **Hands-off delivery.** Every push to `main` deploys the client with no manual steps.
 
 ## Generate once, serve forever
 
-The key decision: nothing is generated while someone plays. TypeScript pipelines pull actors, movies and popularity from the TMDB API, build complete game sets and store them in MongoDB Atlas. At play time, four Lambda functions only read. A round costs one small query, so the game stays fast and the bill stays close to zero.
+The key decision: nothing is generated while someone plays. TypeScript pipelines pull actors, movies and popularity from the TMDB API, build complete game sets and store them in MongoDB Atlas. At play time, three Lambda functions read those game sets and a fourth stores play events. A round costs one small query, so the game stays fast and the bill stays close to zero.
 
 <FlowDiagram
   rows={[
@@ -94,7 +97,7 @@ The key decision: nothing is generated while someone plays. TypeScript pipelines
       label: "Play time · every request",
       tone: "core",
       nodes: [
-        { title: "4 Lambda functions", note: "Node.js in Docker, read only" },
+        { title: "4 Lambda functions", note: "Node.js in Docker: three read, one stores events" },
         { title: "API Gateway", note: "HTTP API" },
         { title: "CloudFront", note: "adds the API key at the edge" },
       ],
@@ -109,21 +112,43 @@ The key decision: nothing is generated while someone plays. TypeScript pipelines
     },
   ]}
   links={["game sets, ready to serve", "JSON over HTTPS"]}
+  caption="Content is built once, ahead of time. At play time the functions serve ready-made game sets and never generate anything."
 />
 
 Every AWS resource lives in Terraform: the S3 bucket and CloudFront distribution with origin access control, the certificate and DNS, API Gateway, the Lambda functions and their container registry. GitHub Actions builds and ships the client on every push to `main`.
 
+## What I built
+
+Everything, alone: the game design, the code and the infrastructure it runs on.
+
+<Cards
+  items={[
+    { title: "Client", body: "A React Router single-page app, mobile first and installable as a PWA, served from S3 behind CloudFront." },
+    { title: "API", body: "Four Lambda functions in Node.js, packaged as Docker images, behind an API Gateway HTTP API." },
+    { title: "Pipelines", body: "TypeScript scripts that pull from TMDB and pre-generate complete game sets in MongoDB Atlas." },
+    {
+      title: "Infrastructure",
+      body: "Terraform for every AWS resource: bucket, distribution, certificate, DNS, gateway, functions and container registry.",
+    },
+    {
+      title: "Delivery",
+      body: "GitHub Actions ships the client on every push to main. One script builds, pushes and deploys the function images.",
+    },
+    { title: "Analytics", body: "GA4 events and funnels on the client, plus play events stored by the fourth function." },
+  ]}
+/>
+
 ## From an empty repo to production in a week
 
-<Timeline
+<Steps
   items={[
-    { date: "12 Sep 2025", title: "Scaffold", body: "A Turborepo monorepo with a Vite client." },
-    { date: "16 Sep", title: "First playable game UI" },
-    { date: "18 Sep", title: "Fuzzy matching on answers", body: "The first version had typed answers, so close enough had to count." },
-    { date: "19 Sep", title: "CI/CD and AWS", body: "GitHub Actions, S3 and CloudFront with origin access control, all in Terraform." },
-    { date: "20 Sep", title: "Analytics and PWA", body: "GA4 events, a mobile-first layout and an installable app." },
-    { date: "12 to 13 Oct", title: "Game sets and two modes", body: "Pre-generated game sets, a new endpoint to serve them and two game modes." },
-    { date: "May 2026", title: "Back with agents", body: "The API key moves to the edge, then five audit reports." },
+    { label: "12 Sep 2025", title: "Scaffold", body: "A Turborepo monorepo with a Vite client." },
+    { label: "16 Sep", title: "First playable game UI" },
+    { label: "18 Sep", title: "Fuzzy matching on answers", body: "The first version had typed answers, so close enough had to count." },
+    { label: "19 Sep", title: "CI/CD and AWS", body: "GitHub Actions, S3 and CloudFront with origin access control, all in Terraform." },
+    { label: "20 Sep", title: "Analytics and PWA", body: "GA4 events, a mobile-first layout and an installable app." },
+    { label: "12 to 13 Oct", title: "Game sets and two modes", body: "Pre-generated game sets, a new endpoint to serve them and two game modes." },
+    { label: "May 2026", title: "Back with agents", body: "The API key moves to the edge, then five audit reports." },
   ]}
 />
 
@@ -133,21 +158,23 @@ I wrote this codebase alone, and nobody had ever reviewed it. In May 2026 I came
 
 Then I asked for an audit. The agents wrote four fix plans, one each for the backend, the client, the infrastructure and the pipelines, plus a UX evaluation. Every issue came with the file, the problem and a proposed fix, ranked by priority. Some of what they found:
 
-- Lambda handlers with no error handling, so a database timeout became a bare 502 that the browser then reported as a CORS error.
-- A CORS setup at the gateway that contradicted the one inside the functions.
-- A seed script whose debug flag silently skipped every write to the database.
-- Icon-only buttons with no label for screen readers.
+- **Silent failures.** Lambda handlers had no error handling, so a database timeout became a bare 502 that the browser then reported as a CORS error.
+- **Two CORS setups.** The rules at the gateway contradicted the ones inside the functions.
+- **A seed that never seeded.** A debug flag in a seed script silently skipped every write to the database.
+- **Unlabelled buttons.** Icon-only buttons had no label for screen readers.
 
 Those plans are now the game's backlog, already sorted by what to fix first.
 
-## What a week of evenings looks like
+## The principles behind it
 
-<Metrics
+<Principles
   items={[
-    { value: 7, label: "days from first commit to production" },
-    { value: 4, label: "read-only Lambda functions" },
-    { value: 97, label: "commits" },
-    { value: 5, label: "audit reports by agents" },
+    { title: "Generate once", body: "Game content is built when it changes, never while someone plays." },
+    { title: "Light at play time", body: "A round is one small query against a ready-made game set. Nothing heavy runs per request." },
+    { title: "Key at the edge", body: "CloudFront adds the API key, so it never ships in the browser bundle." },
+    { title: "Mobile first", body: "Designed for a phone in one hand. The desktop is the special case." },
+    { title: "Pressure, not punishment", body: "A wrong answer costs three seconds, not the game. The clock keeps you moving." },
+    { title: "Infrastructure as code", body: "Every AWS resource is in Terraform, so the game can be rebuilt from scratch." },
   ]}
 />
 

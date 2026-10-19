@@ -52,7 +52,7 @@ function status(card: Card, column: Column, step: number) {
   return card.autonomy === "auto" ? "merged by the agent" : "merged by a human";
 }
 
-export function AgentBoard({ className = "my-12 lg:-mx-20" }: { className?: string }) {
+export function AgentBoard({ className = "my-14" }: { className?: string }) {
   const root = useRef<HTMLDivElement>(null);
   const pending = useRef<Flip.FlipState | null>(null);
   const restarting = useRef(false);
@@ -111,7 +111,7 @@ export function AgentBoard({ className = "my-12 lg:-mx-20" }: { className?: stri
 
   return (
     <figure className={className}>
-      <div ref={root} className="relative overflow-x-auto rounded-2xl border border-line bg-paper-2 p-3">
+      <div ref={root} className="relative overflow-x-auto rounded-3xl bg-paper-2 p-3 sm:p-4">
         <div className="grid min-w-[880px] grid-cols-5 gap-3">
           {columns.map((column) => {
             const inColumn = cards.filter((card) => place(card, tick).column === column.id);
@@ -152,7 +152,7 @@ export function AgentBoard({ className = "my-12 lg:-mx-20" }: { className?: stri
           })}
         </div>
       </div>
-      <figcaption className="mt-4 grid gap-2 text-sm text-ink-2 sm:grid-cols-2">
+      <figcaption className="mt-3 grid gap-2 text-[13px] text-muted sm:grid-cols-2">
         <p>
           <span className="rounded bg-[#dcfce7] px-1.5 py-0.5 font-mono text-xs text-[#166534]">autonomy:auto</span>{" "}
           The agent delivers end to end and merges after an independent review approves and CI is green.
