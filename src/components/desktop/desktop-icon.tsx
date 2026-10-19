@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type DesktopIconProps = {
@@ -30,14 +31,25 @@ function FolderGlyph() {
   );
 }
 
+const fileTypeIcons: Record<string, string> = {
+  md: "/app-icons/markdown.svg",
+  pdf: "/app-icons/pdf.svg",
+};
+
 function FileGlyph({ ext }: { ext: string }) {
   return (
-    <svg viewBox="0 0 48 56" className="h-12 w-12 drop-shadow-sm transition-transform group-hover:-translate-y-0.5" aria-hidden>
-      <path d="M6 2h26l12 12v38a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" className="fill-card stroke-line" strokeWidth="1.5" />
-      <path d="M32 2v10a2 2 0 0 0 2 2h10" className="fill-paper-2 stroke-line" strokeWidth="1.5" />
-      <text x="24" y="42" textAnchor="middle" className="fill-muted font-mono text-[9px] font-semibold uppercase">
-        {ext}
-      </text>
-    </svg>
+    <span className="relative block h-12 w-12 transition-transform group-hover:-translate-y-0.5">
+      <svg viewBox="0 0 48 56" className="h-12 w-12 drop-shadow-sm" aria-hidden>
+        <path d="M6 2h26l12 12v38a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" className="fill-card stroke-line" strokeWidth="1.5" />
+        <path d="M32 2v10a2 2 0 0 0 2 2h10" className="fill-paper-2 stroke-line" strokeWidth="1.5" />
+      </svg>
+      <Image
+        src={fileTypeIcons[ext] ?? fileTypeIcons.md}
+        alt=""
+        width={22}
+        height={22}
+        className="absolute bottom-2.5 left-1/2 -translate-x-1/2"
+      />
+    </span>
   );
 }
