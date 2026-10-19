@@ -1,23 +1,21 @@
 # alessandromangone
 
-Personal site and blog of Alessandro Mangone, Tech Lead and Engineering Manager, CTO at Matcha.
+Personal site and blog of Alessandro Mangone, Engineering Manager and co-founder & CTO of Matcha.
 
-> Status: **skeleton mockup**. Structure, layout and interactions are in place; every piece of copy written in `[brackets]` is a placeholder to replace.
+Live at [alessandromangone.vercel.app](https://alessandromangone.vercel.app). Every push to `main` deploys to production on Vercel.
 
 ## Concept
 
-The home page is a developer's desktop: folders open the case studies, a working terminal doubles as navigation (`help`, `ls`, `open matcha`, `contact`...), and the dock holds the contact links. Below the desktop the page tells the story in order:
+The home page is a developer's desktop. It boots in on load, the terminal types `whoami` by itself and works as navigation (`help`, `ls`, `open matcha`, `contact`), the windows can be dragged by their title bar, folders open the case studies and the dock holds the contact links. Below it:
 
-1. **Desktop** (hero)
-2. **Highlights**: proof in one line each
-3. **Superpowers**: four pillars, each with three metrics and a case study
-4. **Selected work**: case study cards
-5. **Career**: the timeline as a `git log`
-6. **Writing**: latest blog posts
-7. **About**: `about-me.md` (Then / Now / Next) and `stack.json`
-8. **Contact**: footer on every page
+1. **Selected work**: each case study as a full-width poster in the project's own colors.
+2. **How I work**: the agent board from Matcha, running live.
+3. **Career**: the timeline as a `git log`.
+4. **Writing**: shown only once a post is published.
+5. **About**: `about-me.md` and `stack.json`.
+6. **Contact**: footer on every page.
 
-Case studies follow one narrative arc: insight → challenge → leadership → process → results → closing. Headings are claims, not labels.
+Case studies follow one arc (insight, challenge, decisions, delivery, results, closing) and use animated building blocks: a layered flow diagram, a scroll-driven state machine, a timeline and the agent board.
 
 Reference analysis (in Italian): [`docs/analisi-riferimenti.md`](docs/analisi-riferimenti.md).
 
@@ -26,18 +24,26 @@ Reference analysis (in Italian): [`docs/analisi-riferimenti.md`](docs/analisi-ri
 - Next.js 16 (App Router, Cache Components) + TypeScript
 - Tailwind CSS 4
 - MDX via `@next/mdx` for case studies and posts
+- GSAP (ScrollTrigger, Flip, Draggable) via `@gsap/react`. Every animation runs inside `(prefers-reduced-motion: no-preference)`, so reduced motion shows the final state.
 
 ## Where things live
 
 | What | Where |
 | --- | --- |
-| Personal copy, links, pillars, career, skills | `src/lib/site.ts` |
+| Personal copy, links, career, skills | `src/lib/site.ts` |
 | Case studies | `src/content/work/*.mdx` |
 | Blog posts | `src/content/blog/*.mdx` |
-| MDX styles and components (`<Metrics>`, `<Callout>`) | `src/mdx-components.tsx` |
-| Design tokens (colors, fonts) | `src/app/globals.css` |
+| MDX building blocks | `src/components/case-study/`, registered in `src/mdx-components.tsx` |
+| Animations | `src/components/motion/`, plugins registered in `src/lib/gsap.ts` |
+| Case study images | `public/work/<slug>/` |
+| Brand icons | `public/app-icons/` (Iconify "logos", CC0; "vscode-icons", MIT) |
+| Design tokens | `src/app/globals.css` |
 
-Each MDX file exports a `metadata` object (see the existing files for the fields). Adding a file to `src/content/work` also adds a folder to the desktop and a card to the work pages.
+### Conventions
+
+- **Placeholders.** A value in `[brackets]` in `site.ts` is a placeholder. The UI hides it (dock icon, footer link, status line) until it holds a real value.
+- **Case studies.** Each MDX file exports `metadata` with `theme` (colors and optional brand font), `cover` and `stats`. Adding a file adds a desktop folder, a poster and a page.
+- **Posts.** Set `draft: true` to keep a post out of every list. The Blog link, folder and section appear with the first published post.
 
 ## Develop
 

@@ -5,7 +5,7 @@ import { SectionHeading } from "../section-heading";
 export function About() {
   return (
     <section id="about" className="mx-auto max-w-6xl px-4 py-20">
-      <SectionHeading eyebrow="about" title="[The short version of a long story.]" />
+      <SectionHeading eyebrow="about" title="The short version." />
       <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
         <Window title="about-me.md" bodyClassName="space-y-6 p-6">
           <div>
@@ -16,10 +16,6 @@ export function About() {
             <p className="font-mono text-xs text-muted uppercase">## Now</p>
             <p className="mt-1 text-ink-2">{about.now}</p>
           </div>
-          <details className="group">
-            <summary className="cursor-pointer font-mono text-xs text-accent-ink uppercase">## Next (click)</summary>
-            <p className="mt-1 text-ink-2">{about.next}</p>
-          </details>
         </Window>
 
         <Window title="stack.json" bodyClassName="space-y-5 p-6">

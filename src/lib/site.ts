@@ -1,5 +1,7 @@
 // Single source for the personal copy shown across the site.
-// Everything in [brackets] is placeholder content to replace.
+// Values in [brackets] are placeholders: the UI hides them until they are filled in.
+
+export const isPlaceholder = (value: string) => value.includes("[");
 
 export const site = {
   name: "Alessandro Mangone",
@@ -25,93 +27,57 @@ export const now = [
   { label: "Building", value: "Matcha's MVP, getting ready for the Milan launch" },
   { label: "Reading", value: "[Book title]" },
   { label: "Listening", value: "[Song or album]" },
-];
-
-export const highlights = [
-  { title: "CTO, Matcha", detail: "Leading the tech behind a dating app that turns matches into real dates" },
-  { title: "[Talk / conference]", detail: "[One line of proof]" },
-  { title: "[Mentoring / community]", detail: "[One line of proof]" },
-  { title: "[Open source / side project]", detail: "[One line of proof]" },
-  { title: "[Award / certification]", detail: "[One line of proof]" },
-];
-
-export type Superpower = {
-  area: string;
-  title: string;
-  body: string;
-  href: string;
-  cta: string;
-  metrics: { value: string; label: string }[];
-};
-
-export const superpowers: Superpower[] = [
-  {
-    area: "Leadership",
-    title: "[Teams that ship without heroics.]",
-    body: "[How you build and run engineering teams: rituals, ownership, the way you grow people.]",
-    href: "/work/matcha",
-    cta: "Full case study",
-    metrics: [
-      { value: "[00]", label: "[engineers led]" },
-      { value: "[00]", label: "[people hired]" },
-      { value: "[00%]", label: "[retention / engagement]" },
-    ],
-  },
-  {
-    area: "Architecture",
-    title: "[Systems that survive the next pivot.]",
-    body: "[The technical decisions you own: architecture, trade-offs, platform choices.]",
-    href: "/work/matcha",
-    cta: "Full case study",
-    metrics: [
-      { value: "[00.9%]", label: "[uptime]" },
-      { value: "[00ms]", label: "[p95 latency]" },
-      { value: "[0x]", label: "[scale handled]" },
-    ],
-  },
-  {
-    area: "Delivery",
-    title: "[From roadmap to production, every week.]",
-    body: "[How you turn product bets into shipped software: process, cadence, quality.]",
-    href: "/work/project-two",
-    cta: "Full case study",
-    metrics: [
-      { value: "[00/wk]", label: "[deploys]" },
-      { value: "[00h]", label: "[lead time for changes]" },
-      { value: "[0%]", label: "[change failure rate]" },
-    ],
-  },
-  {
-    area: "AI & Platform",
-    title: "[AI where it moves the needle.]",
-    body: "[Where you bring AI into the product and into the way the team works.]",
-    href: "/work/ai-training-program",
-    cta: "Full case study",
-    metrics: [
-      { value: "[00]", label: "[AI features shipped]" },
-      { value: "[00%]", label: "[time saved]" },
-      { value: "[00]", label: "[agents / automations in prod]" },
-    ],
-  },
-];
+].filter((item) => !isPlaceholder(item.value));
 
 export const career = [
-  { hash: "a3f9c21", year: "2026", role: "CTO", company: "Matcha", note: "[One-line impact]", head: true },
-  { hash: "8be04d7", year: "[YYYY]", role: "[Engineering Manager]", company: "[Company]", note: "[One-line impact]" },
-  { hash: "51c7a90", year: "[YYYY]", role: "[Tech Lead]", company: "[Company]", note: "[One-line impact]" },
-  { hash: "e2d6b38", year: "[YYYY]", role: "[Software Engineer]", company: "[Company]", note: "[One-line impact]" },
-  { hash: "0c4f1aa", year: "[YYYY]", role: "Initial commit", company: "[First job / studies]", note: "[Where it started]" },
+  {
+    hash: "a3f9c21",
+    year: "2026",
+    role: "Co-founder & CTO",
+    company: "Matcha",
+    note: "architecture and code end to end, with a board of coding agents",
+    refs: "HEAD -> matcha",
+  },
+  {
+    hash: "8be04d7",
+    year: "2024",
+    role: "Engineering Manager",
+    company: "BID Company",
+    note: "18 engineers, grown from 3; the company's AI adoption program",
+    refs: "main",
+  },
+  {
+    hash: "51c7a90",
+    year: "2022",
+    role: "DevOps & Cloud Engineer",
+    company: "BID Company",
+    note: "cloud architecture, zero-downtime CI/CD, Terraform modules saving up to €50k a year",
+  },
+  {
+    hash: "e2d6b38",
+    year: "2020",
+    role: "Data & Analytics Consultant",
+    company: "BID Company",
+    note: "reporting and data pipelines for banking clients",
+  },
+  {
+    hash: "0c4f1aa",
+    year: "2019",
+    role: "Full Stack Developer",
+    company: "Freelance",
+    note: "web apps end to end, from requirements to production",
+  },
 ];
 
 export const about = {
-  then: "[Where you started: first job, first team, the moment you moved from writing code to leading people.]",
-  now: "[What you do today at Matcha: team size, scope, what you own end to end.]",
-  next: "[An ironic or personal line about the future, revealed on click.]",
+  then: "I started in 2019 as a freelance full-stack developer, then moved through data consulting and cloud engineering before taking on my first team in 2024. Each step widened the scope: from my own code, to the infrastructure, to the people who build on it.",
+  now: "I lead an 18-person engineering team at BID Company, own delivery for enterprise clients and run the company's AI adoption program. I'm also co-founder and CTO of Matcha, where I write the code with a board of coding agents.",
 };
 
 export const skills = [
-  { group: "Leadership", items: ["[Hiring]", "[1:1s & career growth]", "[Team scaling]", "[Stakeholder management]"] },
-  { group: "Engineering", items: ["[System design]", "[Cloud architecture]", "[Code review culture]", "[Your stack]"] },
-  { group: "Delivery", items: ["[Roadmapping]", "[Agile at scale]", "[DORA metrics]", "[Incident management]"] },
-  { group: "AI", items: ["[LLM integration]", "[Agents]", "[AI-assisted development]", "[Evaluation]"] },
+  { group: "Leadership", items: ["Hiring", "1:1s & performance reviews", "Team scaling", "Delivery planning", "Technical direction"] },
+  { group: "AI", items: ["LLM integration", "RAG", "Agentic workflows", "Coding agents", "Agent skills"] },
+  { group: "Engineering", items: ["TypeScript", "Python", "Node.js", "NestJS", "React", "React Native", "Next.js"] },
+  { group: "Cloud & data", items: ["AWS", "Terraform", "Docker", "GitHub Actions", "PostgreSQL", "Supabase"] },
+  { group: "Certified", items: ["AWS Solutions Architect Associate", "AWS AI Practitioner"] },
 ];

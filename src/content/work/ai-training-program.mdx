@@ -2,11 +2,18 @@ export const metadata = {
   title: "AI Training Program",
   summary:
     "Generative AI training for client teams, and the rollout of coding agents across my own engineering team.",
-  year: "[2026]",
+  year: "Ongoing",
   role: "Co-designer & Trainer",
   team: "Client teams + 18 engineers",
   tags: ["Generative AI", "Training", "Coding Agents"],
-  order: 2,
+  order: 3,
+  theme: { bg: "#14161f", fg: "#f4f4f6", accent: "#8b8cf6", accentInk: "#4b45c6" },
+  cover: { kind: "type", label: "600+" },
+  stats: [
+    { value: 600, suffix: "+", label: "people trained on generative AI" },
+    { value: 18, label: "engineers building with coding agents" },
+    { value: 2, label: "tracks: client teams and engineering" },
+  ],
 };
 
 ## Adoption is a people problem before it is a tooling problem
@@ -71,9 +78,8 @@ Agents write code; people decide what ships. Every pull request goes through hum
 
 <Metrics
   items={[
-    { value: "600+", label: "people trained on generative AI" },
+    { value: 600, suffix: "+", label: "people trained on generative AI" },
     { value: "18/18", label: "engineers on my team build with coding agents" },
-    { value: "[25+]", label: "[companies involved, to confirm]" },
   ]}
 />
 

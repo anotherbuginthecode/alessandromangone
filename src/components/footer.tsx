@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { isPlaceholder, site } from "@/lib/site";
 
 const links = [
   { label: "Email", href: `mailto:${site.email}` },
@@ -6,7 +6,7 @@ const links = [
   { label: "GitHub", href: site.links.github },
   { label: "Book a call", href: site.links.calendar },
   { label: "CV", href: site.links.cv },
-];
+].filter((link) => !isPlaceholder(link.href));
 
 export function Footer() {
   return (
@@ -14,10 +14,10 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-20">
         <p className="font-mono text-sm text-accent">{"// contact"}</p>
         <p className="mt-2 max-w-3xl text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
-          [Let&apos;s build a team that ships.]
+          Let&apos;s build a team that ships.
         </p>
 
-        <ul className="mt-10 grid border-t border-white/10 sm:grid-cols-2 lg:grid-cols-5">
+        <ul className="mt-10 grid border-t border-white/10 sm:grid-cols-2 lg:grid-cols-4">
           {links.map((link) => (
             <li key={link.label} className="border-b border-white/10">
               <a
@@ -36,7 +36,8 @@ export function Footer() {
         </ul>
 
         <p className="mt-8 font-mono text-sm text-terminal-muted">
-          Based in {site.location} · {site.status}
+          Based in {site.location}
+          {!isPlaceholder(site.status) && ` · ${site.status}`}
         </p>
 
         {/* Folded paragraph for search engines, as on jacopomarcolini.com. */}

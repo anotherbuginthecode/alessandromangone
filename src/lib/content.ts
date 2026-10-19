@@ -5,6 +5,22 @@ import type { MDXContent } from "mdx/types";
 // Case studies and posts live as MDX files in src/content/<collection>.
 // Each file exports a `metadata` object typed below.
 
+export type CaseStudyTheme = {
+  bg: string;
+  fg: string;
+  accent: string;
+  // Accent dark enough for text on the light page body.
+  accentInk: string;
+  font?: "matcha" | "otg";
+};
+
+export type CaseStudyCover =
+  | { kind: "browser"; src: string; mobileSrc?: string; alt: string; url?: string; art?: string }
+  | { kind: "logo"; src: string; alt: string }
+  | { kind: "type"; label: string };
+
+export type Stat = { value: number; label: string; prefix?: string; suffix?: string };
+
 export type CaseStudyMeta = {
   title: string;
   summary: string;
@@ -14,6 +30,9 @@ export type CaseStudyMeta = {
   tags: string[];
   links?: { label: string; href: string }[];
   order: number;
+  theme: CaseStudyTheme;
+  cover: CaseStudyCover;
+  stats?: Stat[];
 };
 
 export type PostMeta = {
@@ -21,6 +40,7 @@ export type PostMeta = {
   summary: string;
   date: string; // ISO yyyy-mm-dd
   tags: string[];
+  draft?: boolean;
 };
 
 export type Entry<T> = { slug: string; meta: T };
@@ -61,16 +81,18 @@ export async function getCaseStudy(slug: string) {
   return { slug, ...(await loadCaseStudy(slug)) };
 }
 
+// Drafts stay in the repo but are never listed or rendered.
 export async function getPosts(): Promise<Entry<PostMeta>[]> {
   const entries = await Promise.all(
     listPostSlugs().map(async (slug) => ({ slug, meta: (await loadPost(slug)).meta })),
   );
-  return entries.sort((a, b) => b.meta.date.localeCompare(a.meta.date));
+  return entries.filter((e) => !e.meta.draft).sort((a, b) => b.meta.date.localeCompare(a.meta.date));
 }
 
 export async function getPost(slug: string) {
   if (!listPostSlugs().includes(slug)) return null;
-  return { slug, ...(await loadPost(slug)) };
+  const post = { slug, ...(await loadPost(slug)) };
+  return post.meta.draft ? null : post;
 }
 
 const dateFormat = new Intl.DateTimeFormat("en-GB", {

@@ -16,7 +16,7 @@ export function Window({ title, children, dark = false, className = "", bodyClas
         dark ? "border-white/10 bg-terminal text-terminal-ink" : "border-line bg-card"
       } ${className}`}
     >
-      <div className={`flex items-center gap-2 border-b px-3 py-2 ${dark ? "border-white/10" : "border-line"}`}>
+      <div data-drag-handle className={`flex items-center gap-2 border-b px-3 py-2 ${dark ? "border-white/10" : "border-line"}`}>
         <span className="size-3 rounded-full bg-[#ff5f57]" />
         <span className="size-3 rounded-full bg-[#febc2e]" />
         <span className="size-3 rounded-full bg-[#28c840]" />

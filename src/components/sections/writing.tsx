@@ -4,11 +4,12 @@ import { SectionHeading } from "../section-heading";
 
 export async function Writing() {
   const posts = (await getPosts()).slice(0, 3);
+  if (posts.length === 0) return null;
 
   return (
     <section id="writing" className="border-y border-line bg-card">
       <div className="mx-auto max-w-6xl px-4 py-20">
-        <SectionHeading eyebrow="writing" title="[Notes on leading engineers and shipping software.]" />
+        <SectionHeading eyebrow="writing" title="Notes on leading engineers and shipping software." />
         <ul className="divide-y divide-line border-y border-line">
           {posts.map(({ slug, meta }) => (
             <li key={slug}>

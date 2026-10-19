@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { site } from "@/lib/site";
+import { isPlaceholder, site } from "@/lib/site";
 
 const claudePrompt = encodeURIComponent(
   `Tell me about ${site.name}, ${site.roles.join(" and ")}. What kind of engineering leader is ${site.firstName}?`,
@@ -20,7 +20,7 @@ const apps = [
     tile: "bg-[#f4f0e8]",
     size: 26,
   },
-];
+].filter((app) => !isPlaceholder(app.href));
 
 // Contact links styled as a macOS dock.
 export function Dock() {

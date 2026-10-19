@@ -1,16 +1,31 @@
 import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { AgentBoard } from "@/components/case-study/agent-board";
+import { FlowDiagram } from "@/components/case-study/flow-diagram";
+import { BrowserFrame, PhoneFrame } from "@/components/case-study/frames";
+import { Quote } from "@/components/case-study/quote";
+import { StateMachine } from "@/components/case-study/state-machine";
+import { Timeline } from "@/components/case-study/timeline";
+import { Counter } from "@/components/motion/counter";
 
 // Building blocks available in every MDX file without importing them.
 
-function Metrics({ items }: { items: { value: string; label: string }[] }) {
+type Metric = { value: string | number; label: string; prefix?: string; suffix?: string };
+
+// Numeric values count up on scroll; string values (like "18/18") render as is.
+function Metrics({ items }: { items: Metric[] }) {
   return (
-    <dl className="my-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
+    <dl className={`my-8 grid grid-cols-2 gap-4 ${items.length === 4 ? "sm:grid-cols-4" : "sm:grid-cols-3"}`}>
       {items.map((item) => (
-        <div key={item.label} className="rounded-lg border border-line bg-card p-4">
-          <dt className="sr-only">{item.label}</dt>
-          <dd className="font-mono text-2xl font-semibold">{item.value}</dd>
-          <dd className="mt-1 text-xs text-muted">{item.label}</dd>
+        <div key={item.label} className="flex flex-col-reverse rounded-xl border border-line bg-card p-4">
+          <dt className="mt-1 text-xs text-muted">{item.label}</dt>
+          <dd className="font-mono text-3xl font-semibold text-accent-ink">
+            {typeof item.value === "number" ? (
+              <Counter value={item.value} prefix={item.prefix} suffix={item.suffix} />
+            ) : (
+              item.value
+            )}
+          </dd>
         </div>
       ))}
     </dl>
@@ -28,7 +43,7 @@ function Callout({ title, children }: { title: string; children: ReactNode }) {
 
 const components = {
   h2: (props: ComponentPropsWithoutRef<"h2">) => (
-    <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-balance sm:text-3xl" {...props} />
+    <h2 className="mt-20 mb-5 text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl" {...props} />
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => <h3 className="mt-8 mb-2 text-lg font-semibold" {...props} />,
   p: (props: ComponentPropsWithoutRef<"p">) => <p className="my-4 leading-relaxed text-ink-2" {...props} />,
@@ -57,6 +72,13 @@ const components = {
   hr: () => <hr className="my-10 border-line" />,
   Metrics,
   Callout,
+  AgentBoard,
+  BrowserFrame,
+  FlowDiagram,
+  PhoneFrame,
+  Quote,
+  StateMachine,
+  Timeline,
 } satisfies MDXComponents;
 
 export function useMDXComponents(): MDXComponents {

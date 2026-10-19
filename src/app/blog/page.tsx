@@ -5,7 +5,7 @@ import { formatDate, getPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "[Notes on leading engineers and shipping software.]",
+  description: "Notes on leading engineers and shipping software.",
 };
 
 export default async function BlogPage() {
@@ -13,8 +13,9 @@ export default async function BlogPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">
-      <SectionHeading eyebrow="blog" title="[Notes on leading engineers and shipping software.]" />
-      <ul className="divide-y divide-line border-y border-line">
+      <SectionHeading eyebrow="blog" title="Notes on leading engineers and shipping software." />
+      {posts.length === 0 && <p className="font-mono text-sm text-muted">{"// first posts are on the way"}</p>}
+      <ul className="divide-y divide-line border-y border-line empty:hidden">
         {posts.map(({ slug, meta }) => (
           <li key={slug}>
             <Link href={`/blog/${slug}`} className="group block py-6">

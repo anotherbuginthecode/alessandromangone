@@ -53,6 +53,16 @@ body {
   scroll-margin-top: 4rem;
 }
 
+@keyframes wobble {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -10px;
+  }
+}
+
 .dot-grid {
   background-image: radial-gradient(var(--line) 1px, transparent 1px);
   background-size: 22px 22px;

@@ -1,68 +1,133 @@
 export const metadata = {
   title: "Matcha",
-  summary: "A dating app that turns every match into a real date.",
+  summary: "A dating app that turns every match into a real date. Both people pay €10, pick their free evenings, and Matcha books the table.",
   year: "2026",
-  role: "CTO",
-  team: "[Team size]",
-  tags: ["Mobile App", "Marketplace", "Leadership"],
-  links: [{ label: "matchadating.it", href: "https://matchadating.it" }],
+  role: "Co-founder & CTO",
+  team: "3 co-founders + coding agents",
+  tags: ["Mobile App", "Marketplace", "Agentic Delivery"],
+  links: [{ label: "matchadating.it", href: "https://www.matchadating.it" }],
   order: 1,
+  theme: { bg: "#222222", fg: "#fffafa", accent: "#62cfc0", accentInk: "#2a6f66", font: "matcha" },
+  cover: {
+    kind: "browser",
+    src: "/work/matcha/landing-desktop.webp",
+    mobileSrc: "/work/matcha/landing-mobile.webp",
+    alt: "The Matcha landing page: from a match to a real table",
+    url: "matchadating.it",
+    art: "/work/matcha/splash.webp",
+  },
+  stats: [
+    { value: 121, label: "pull requests merged" },
+    { value: 78, suffix: "%", label: "opened by coding agents" },
+    { value: 25, label: "server functions" },
+    { value: 111, label: "database migrations" },
+    { value: 20, label: "architecture decisions on record" },
+  ],
 };
 
-{/*
-  Case study template. Every heading is a claim, not a label.
-  Arc: insight → challenge → leadership → process → results → closing.
-*/}
+## Swipe apps optimise for the chat. Matcha optimises for the table.
 
-## [Insight: the problem, stated as a claim]
+Most dating apps measure success in messages. Matcha measures it in dates that actually happen. Two people like each other, each pays €10, which covers a drink, each picks the evenings they are free, and Matcha books a table at a partner venue in Milan. A short chat opens two hours before the date and closes an hour after it. There is no endless chat to get lost in.
 
-[Two short paragraphs of context: the market, the users, and the observation that started everything.]
+I co-founded Matcha with two partners. I own everything technical: the architecture, the code and the way it gets delivered.
 
-[What the product does differently, in plain words.]
+## Real money, strangers meeting in person, no backend team
 
-## [Challenge: what had to exist, starting from zero]
+A dating app that ends at a real table carries more weight than a chat app. From the first release we needed:
 
-[One sentence on the starting point.] We needed:
+- Payments that become real only when the payment provider says so.
+- Two people's free evenings matched without either one seeing the other's.
+- Identity checks, reports, blocks and moderation, because strangers meet face to face.
+- A venue network run by one person, without building a custom CRM.
+- All of it shipped by one engineer and a board of coding agents.
 
-- [A platform that ...]
-- [A team that ...]
-- [A delivery process that ...]
-- [A technical foundation that ...]
+## The app may express intent. Only the server records facts.
 
-## [Leadership: how I set the team up to win]
+The mobile app is a thin client built with Expo and React Native. It has no backend of its own: it talks to Supabase with the user's session and nothing more. Postgres is the single source of truth. The app can like a profile, submit free evenings or send a chat message. It cannot mark a match as paid, change its status, grant a credit or suspend anyone. Database permissions enforce that, not code review.
 
-<Callout title="My role as CTO">
-[Team size and shape, hiring, rituals, reporting lines. The decisions that were yours to make, and why.]
-</Callout>
+<Quote source="ARCHITECTURE.md, the rule every change is checked against">The app may express intent, but only the server records facts.</Quote>
 
-## [Process: from first commit to launch]
+<FlowDiagram
+  rows={[
+    { label: "Client · expresses intent", nodes: [{ title: "Mobile app", note: "Expo + React Native, iOS and Android" }] },
+    {
+      label: "Supabase · records facts",
+      tone: "core",
+      nodes: [
+        { title: "Postgres", note: "single source of truth" },
+        { title: "Row-level security", note: "what each user may read and write" },
+        { title: "Scheduled jobs", note: "daily pools, expiry, chat open and close" },
+        { title: "Edge Functions", note: "the only door to the outside world" },
+      ],
+    },
+    {
+      label: "External services",
+      nodes: [
+        { title: "Stripe", note: "payments" },
+        { title: "Didit", note: "identity checks" },
+        { title: "OneSignal", note: "push notifications" },
+        { title: "PostHog", note: "product analytics, EU host" },
+      ],
+    },
+    {
+      label: "People in the loop",
+      tone: "people",
+      nodes: [
+        { title: "Airtable", note: "the operators' work queue" },
+        { title: "Slack", note: "the alarm bell, one way only" },
+      ],
+    },
+  ]}
+  links={["intent: like, pay, pick evenings", "webhooks in, calls out", "alerts out, buttons in"]}
+/>
 
-### [Architecture]
+## A match is a state machine, not a conversation
 
-[The key technical choices and the trade-offs behind them.]
+Every match moves through a fixed set of states, and the app writes none of them. Both people share a single 24-hour clock from the moment they match. Paying comes before picking evenings on purpose: the payment is the moment you commit, and it filters out the matches nobody meant to keep.
 
-### [Team and hiring]
+<StateMachine
+  states={[
+    { label: "Pending payment", note: "Both people pay €10 within 24 hours.", movedBy: "the payment provider confirms both payments" },
+    { label: "Picking evenings", note: "Each person picks free slots. Neither sees the other's.", movedBy: "the database finds an overlap" },
+    { label: "Finding a venue", note: "An operator calls a partner venue and books the table.", movedBy: "the operator confirms from Airtable" },
+    { label: "Confirmed", note: "Date, time and place are set.", movedBy: "a scheduled job, two hours before the date" },
+    { label: "Chat open", note: "A short chat for last-minute logistics.", movedBy: "a scheduled job, one hour after the date" },
+    { label: "Completed", note: "Feedback opens. A no-show earns the other person a free date." },
+  ]}
+  exits={["Expired: no payment, no overlap or no venue", "Cancelled: by a user or after a report", "No-show: reported within 24 hours"]}
+/>
 
-[How you built or grew the team, and how you kept it healthy.]
+## Manual first, on purpose
 
-### [Delivery and quality]
+The first design had an algorithm that rotated venues, with availability tables and capacity data. We had none of that data, no tooling on the venue side and one person running operations. So a later decision record cut it from the first release: a person books every venue by hand.
 
-[Cadence, CI/CD, testing, how you protected quality while moving fast.]
+Airtable is the operators' work queue. A button on a row calls the server to confirm a booking or act on a report, and that call is what moves the match forward. Slack is the alarm bell when money or safety needs a human. The algorithm is deferred, not deleted: it gets built when the number of venues and dates justifies it.
 
-### [Trade-offs]
+## Built by a board, reviewed by people
 
-[What you chose not to build, and why that was the right call.]
+Matcha is mostly written by coding agents working a GitHub board. A short file in the repository, `AGENTS.md`, sets the rules: every issue carries one area label and one autonomy label, and the label decides how far an agent can go alone.
 
-## [Results: what changed, in numbers]
+<Quote source="AGENTS.md">A task is ready when a new agent can finish it without asking product or technical questions.</Quote>
+
+<AgentBoard />
+
+The classification is a rubric, and the first match wins. An issue is supervised when it touches authentication, the database schema, money or personal data, security settings, deployment, a published API contract, untrusted content, anything a revert cannot undo, or when it is the first of its kind and sets a pattern others will copy. Everything else runs on auto. An agent may raise an issue from auto to supervised, never the other way round. When it is stuck, it writes the problem, the options and a recommendation, flags the issue for a human and stops.
+
+Two things keep the agents honest. The decision records and the architecture document carry context from one session to the next, and agents update them when they change ownership, data or trust boundaries. Continuous integration runs linting, type checks and unit tests on every pull request, then applies every migration to a separate test project and runs an end-to-end suite against it.
+
+## What the board delivered
 
 <Metrics
   items={[
-    { value: "[00]", label: "[metric]" },
-    { value: "[00%]", label: "[metric]" },
-    { value: "[00x]", label: "[metric]" },
+    { value: 121, label: "pull requests merged in 16 weeks" },
+    { value: 78, suffix: "%", label: "of pull requests opened by agent sessions" },
+    { value: 70, suffix: "%", label: "of commits co-authored by an agent" },
+    { value: 29, label: "issues gated as supervised" },
+    { value: 17, label: "issues run fully on auto" },
+    { value: 20, label: "architecture decision records" },
   ]}
 />
 
-## [Closing: the one idea that ties it all together]
+## The leverage is in the rules, not the prompts
 
-[A synthesis that connects product, team and technology. Then one or two lessons learned.]
+Most of Matcha's code was written by agents, and it still reads like one engineer's decisions. That is what the setup is for. The rubric decides what an agent may do alone. The database permissions make the wrong write impossible instead of merely unlikely. The decision records keep the reasoning alive between sessions. Prompts change every week; those rules are what let three founders ship like a bigger team.

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CaseHero, themeStyle } from "@/components/case-study/case-hero";
+import { ReadingProgress } from "@/components/motion/reading-progress";
+import { Reveal } from "@/components/motion/reveal";
 import { getCaseStudies, getCaseStudy, listCaseStudySlugs } from "@/lib/content";
+import { brandFonts } from "@/lib/fonts";
 
 export function generateStaticParams() {
   return listCaseStudySlugs().map((slug) => ({ slug }));
@@ -23,55 +27,33 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const next = all[(all.findIndex((s) => s.slug === slug) + 1) % all.length];
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-16">
-      <Link href="/work" className="font-mono text-sm text-muted hover:text-accent-ink">
-        ← Selected work
-      </Link>
+    <article style={themeStyle(meta.theme)}>
+      <ReadingProgress />
+      <CaseHero meta={meta} />
 
-      <header className="mt-8 border-b border-line pb-10">
-        <p className="flex flex-wrap gap-x-3 font-mono text-xs text-muted">
-          {meta.tags.map((tag) => (
-            <span key={tag}>#{tag}</span>
-          ))}
-        </p>
-        <h1 className="mt-3 text-5xl font-semibold tracking-tight">{meta.title}</h1>
-        <p className="mt-4 text-xl text-ink-2">{meta.summary}</p>
-        <dl className="mt-8 grid grid-cols-2 gap-6 font-mono text-sm sm:grid-cols-4">
-          <div>
-            <dt className="text-xs text-muted uppercase">Role</dt>
-            <dd className="mt-1">{meta.role}</dd>
-          </div>
-          <div>
-            <dt className="text-xs text-muted uppercase">Year</dt>
-            <dd className="mt-1">{meta.year}</dd>
-          </div>
-          {meta.team && (
-            <div>
-              <dt className="text-xs text-muted uppercase">Team</dt>
-              <dd className="mt-1">{meta.team}</dd>
-            </div>
-          )}
-          {meta.links && (
-            <div>
-              <dt className="text-xs text-muted uppercase">Links</dt>
-              {meta.links.map((link) => (
-                <dd key={link.href} className="mt-1">
-                  <a href={link.href} target="_blank" rel="noreferrer" className="underline hover:text-accent-ink">
-                    {link.label} ↗
-                  </a>
-                </dd>
-              ))}
-            </div>
-          )}
-        </dl>
-      </header>
-
-      <Content />
+      <Reveal className="mx-auto max-w-3xl px-4 pt-4 pb-24">
+        <Content />
+      </Reveal>
 
       {next && next.slug !== slug && (
-        <Link href={`/work/${next.slug}`} className="group mt-20 block rounded-xl border border-line bg-card p-6">
-          <p className="font-mono text-xs text-muted uppercase">Next case study</p>
-          <p className="mt-1 text-2xl font-semibold group-hover:text-accent-ink">{next.meta.title} →</p>
+        <Link
+          href={`/work/${next.slug}`}
+          style={themeStyle(next.meta.theme)}
+          className="group block bg-[var(--cs-bg)] text-[var(--cs-fg)]"
+        >
+          <div className="mx-auto flex max-w-6xl items-end justify-between gap-6 px-4 py-16 sm:py-20">
+            <div>
+              <p className="font-mono text-xs uppercase opacity-60">Next case study</p>
+              <p
+                className={`${next.meta.theme.font ? brandFonts[next.meta.theme.font] : ""} mt-2 text-5xl font-extrabold tracking-tight sm:text-7xl`}
+              >
+                {next.meta.title}
+              </p>
+            </div>
+            <span className="text-5xl text-[var(--cs-accent)] transition-transform group-hover:translate-x-2" aria-hidden>
+              →
+            </span>
+          </div>
         </Link>
       )}
     </article>
