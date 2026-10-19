@@ -33,11 +33,9 @@ export async function Desktop() {
           <div className="order-first flex flex-col justify-end gap-5 lg:order-none lg:pb-16">
             <p className="font-mono text-sm text-muted">{site.roles.join(" · ")}</p>
             <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              I&apos;m {site.firstName}. I lead engineering at{" "}
-              <a href={site.company.href} target="_blank" rel="noreferrer" className="text-accent-ink underline decoration-2 underline-offset-4">
-                {site.company.name}
-              </a>
-              .
+              I&apos;m {site.firstName}.
+              <br />
+              <span className="text-accent-ink">{site.headline}</span>
             </h1>
             <p className="max-w-xl text-lg text-ink-2">{site.tagline}</p>
           </div>

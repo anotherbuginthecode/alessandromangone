@@ -4,17 +4,17 @@
 export const site = {
   name: "Alessandro Mangone",
   firstName: "Alessandro",
-  roles: ["Tech Lead", "Engineering Manager", "CTO"],
-  company: { name: "Matcha", href: "https://matchadating.it" },
+  roles: ["Engineering Manager", "Co-founder & CTO, Matcha"],
+  headline: "Engineering manager who still ships.",
   tagline:
-    "[One sentence on what you do every day: the teams you lead, the systems you build, the outcomes you own.]",
+    "I lead an 18-person team at BID Company, where engineers and coding agents share one board: agents pick up the issues and open tested PRs, people review and merge. I build Matcha the same way, as co-founder and CTO.",
   description:
-    "Alessandro Mangone is a Tech Lead and Engineering Manager, currently CTO at Matcha. [SEO description to refine.]",
-  location: "[City], Italy",
+    "Alessandro Mangone is an Engineering Manager in Milan, leading an 18-person team at BID Company, running its AI adoption program and building with coding agents every day. Co-founder and CTO of Matcha.",
+  location: "Milan, Italy",
   status: "Open to [Tech Lead / EM] conversations",
   email: "[hello@yourdomain.com]",
   links: {
-    linkedin: "https://www.linkedin.com/in/[handle]",
+    linkedin: "https://www.linkedin.com/in/alessandro-mangone-773a961a6",
     github: "https://github.com/anotherbuginthecode",
     calendar: "#[booking-link]",
     cv: "#[cv-link]",
@@ -22,7 +22,7 @@ export const site = {
 };
 
 export const now = [
-  { label: "Building", value: "[What you are shipping at Matcha right now]" },
+  { label: "Building", value: "Matcha's MVP, getting ready for the Milan launch" },
   { label: "Reading", value: "[Book title]" },
   { label: "Listening", value: "[Song or album]" },
 ];
@@ -85,7 +85,7 @@ export const superpowers: Superpower[] = [
     area: "AI & Platform",
     title: "[AI where it moves the needle.]",
     body: "[Where you bring AI into the product and into the way the team works.]",
-    href: "/work/project-three",
+    href: "/work/ai-training-program",
     cta: "Full case study",
     metrics: [
       { value: "[00]", label: "[AI features shipped]" },
