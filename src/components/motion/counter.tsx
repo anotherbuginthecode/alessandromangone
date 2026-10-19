@@ -23,7 +23,7 @@ export function Counter({ value, prefix = "", suffix = "", className = "" }: Cou
           n: value,
           duration: 1.6,
           ease: "power2.out",
-          scrollTrigger: { trigger: ref.current, start: "top 92%", once: true },
+          scrollTrigger: { trigger: ref.current, start: "top bottom", once: true },
           onUpdate: () => {
             text.nodeValue = `${prefix}${Math.round(state.n)}${suffix}`;
           },

@@ -17,7 +17,7 @@ function Metrics({ items }: { items: Metric[] }) {
   return (
     <dl className={`my-8 grid grid-cols-2 gap-4 ${items.length === 4 ? "sm:grid-cols-4" : "sm:grid-cols-3"}`}>
       {items.map((item) => (
-        <div key={item.label} className="flex flex-col-reverse rounded-xl border border-line bg-card p-4">
+        <div key={item.label} className="flex flex-col-reverse justify-end rounded-xl border border-line bg-card p-4">
           <dt className="mt-1 text-xs text-muted">{item.label}</dt>
           <dd className="font-mono text-3xl font-semibold text-accent-ink">
             {typeof item.value === "number" ? (

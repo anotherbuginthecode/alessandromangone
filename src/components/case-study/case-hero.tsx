@@ -75,7 +75,7 @@ export function CaseHero({ meta }: { meta: CaseStudyMeta }) {
         <div className="border-t border-white/10">
           <dl className="mx-auto grid max-w-6xl grid-cols-2 px-4 sm:grid-cols-3 lg:grid-cols-5">
             {meta.stats.map((stat) => (
-              <div key={stat.label} className="flex flex-col-reverse py-6 pr-4 sm:py-8">
+              <div key={stat.label} className="flex flex-col-reverse justify-end py-6 pr-4 sm:py-8">
                 <dt className="mt-1 text-sm opacity-70">{stat.label}</dt>
                 <dd className="font-mono text-3xl font-semibold text-[var(--cs-accent)] sm:text-4xl">
                   <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
