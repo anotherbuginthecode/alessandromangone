@@ -16,7 +16,7 @@ export type CaseStudyTheme = {
 
 export type CaseStudyCover =
   | { kind: "browser"; src: string; mobileSrc?: string; alt: string; url?: string; art?: string }
-  | { kind: "logo"; src: string; alt: string }
+  | { kind: "logo"; src: string; alt: string; screen?: string; screenAlt?: string }
   | { kind: "type"; label: string };
 
 export type Stat = { value: number; label: string; prefix?: string; suffix?: string };

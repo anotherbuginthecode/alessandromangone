@@ -4,6 +4,7 @@ import { AgentBoard } from "@/components/case-study/agent-board";
 import { FlowDiagram } from "@/components/case-study/flow-diagram";
 import { BrowserFrame, PhoneFrame } from "@/components/case-study/frames";
 import { Quote } from "@/components/case-study/quote";
+import { ScreenBoard } from "@/components/case-study/screen-board";
 import { StateMachine } from "@/components/case-study/state-machine";
 import { Timeline } from "@/components/case-study/timeline";
 import { Counter } from "@/components/motion/counter";
@@ -77,6 +78,7 @@ const components = {
   FlowDiagram,
   PhoneFrame,
   Quote,
+  ScreenBoard,
   StateMachine,
   Timeline,
 } satisfies MDXComponents;

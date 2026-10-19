@@ -7,7 +7,13 @@ export const metadata = {
   tags: ["Serverless", "AWS", "Terraform", "Game"],
   order: 2,
   theme: { bg: "#0f0f0f", fg: "#ffffff", accent: "#ffd926", accentInk: "#7a5f00", font: "otg" },
-  cover: { kind: "logo", src: "/work/ohitsthatguy/logo.webp", alt: "Oh it's that guy! logo, a yellow speech bubble" },
+  cover: {
+    kind: "logo",
+    src: "/work/ohitsthatguy/logo.webp",
+    alt: "Oh it's that guy! logo, a yellow speech bubble",
+    screen: "/work/ohitsthatguy/screens/04-round.webp",
+    screenAlt: "A round of the game: an actor's photo and three movies to pick from",
+  },
   stats: [
     { value: 7, label: "days from first commit to production" },
     { value: 4, label: "Lambda functions, read only" },
@@ -19,7 +25,47 @@ export const metadata = {
 
 ## You know the face. You can't name the movie.
 
-Every film has them: the actor you have seen in twenty movies and could never name. Oh It's That Guy turns that feeling into a game. In Standard mode you get five actors and thirty seconds in total. For each face you pick the right movie out of three, wrong answers cost you three seconds, and the score rewards both accuracy and speed. Classic Challenge stretches it to eight rounds and mixes the questions: actor to movie, movie to actor, who is more popular, and true or false.
+Every film has them: the actor you have seen in twenty movies and could never name. Oh It's That Guy turns that feeling into a game. In Standard mode you get five actors and thirty seconds in total. For each face you pick the right movie out of three, wrong answers cost you three seconds, and the score rewards both accuracy and speed. Director's Cut stretches it to ten rounds and mixes the questions: four actor to movie, four movie to actor and two true or false.
+
+## Designed for one thumb and thirty seconds
+
+The game is built for a phone held in one hand, in the few seconds you would otherwise spend scrolling. The home asks one question and offers two buttons. A round shows a face, three answers and a clock that keeps running. A wrong pick turns red, the right one turns green, and you move on. The dark cinema backdrop and the yellow speech bubble give it a personality without slowing anything down.
+
+<ScreenBoard
+  screens={[
+    {
+      src: "/work/ohitsthatguy/screens/01-home.webp",
+      alt: "Home screen: the logo, the question “You've seen the actor before… where?” and two buttons",
+      caption: "Home: one question, two buttons, a cinema in the background.",
+    },
+    {
+      src: "/work/ohitsthatguy/screens/02-how-to-play.webp",
+      alt: "How to Play dialog with the rules of both game modes",
+      caption: "How to play: both modes explained in one dialog.",
+    },
+    {
+      src: "/work/ohitsthatguy/screens/03-modes.webp",
+      alt: "Game mode picker: Standard Edition and Director's Cut",
+      caption: "Two modes: a quick Standard Edition and a ten-round Director's Cut.",
+    },
+    {
+      src: "/work/ohitsthatguy/screens/04-round.webp",
+      alt: "A Standard round: an actor's photo, the question and three movies to pick from",
+      caption: "A round: the face, three movies and a clock that keeps running.",
+    },
+    {
+      src: "/work/ohitsthatguy/screens/05-feedback.webp",
+      alt: "Answer feedback: the wrong pick in red, the right movie in green and a Next button",
+      caption: "Feedback: a wrong pick shows the right answer before you move on.",
+    },
+    {
+      src: "/work/ohitsthatguy/screens/06-movie-to-actor.webp",
+      alt: "A Director's Cut round: a movie title and three actors with their photos",
+      caption: "Director's Cut flips the question: one movie, three faces.",
+    },
+  ]}
+  caption="Real screens of the game. The rounds shown come from its development data."
+/>
 
 ## A side project with production rules
 
@@ -76,7 +122,7 @@ Every AWS resource lives in Terraform: the S3 bucket and CloudFront distribution
     { date: "18 Sep", title: "Fuzzy matching on answers", body: "The first version had typed answers, so close enough had to count." },
     { date: "19 Sep", title: "CI/CD and AWS", body: "GitHub Actions, S3 and CloudFront with origin access control, all in Terraform." },
     { date: "20 Sep", title: "Analytics and PWA", body: "GA4 events, a mobile-first layout and an installable app." },
-    { date: "12 to 13 Oct", title: "Game sets and two modes", body: "Pre-generated game sets, a new endpoint to serve them, Standard and Classic modes." },
+    { date: "12 to 13 Oct", title: "Game sets and two modes", body: "Pre-generated game sets, a new endpoint to serve them and two game modes." },
     { date: "May 2026", title: "Back with agents", body: "The API key moves to the edge, then five audit reports." },
   ]}
 />
