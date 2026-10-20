@@ -8,15 +8,18 @@ import { Terminal } from "./terminal";
 import { Window } from "./window";
 
 // Home hero: a developer's desktop. Folders open case studies, windows can be
-// dragged around, and the dock holds the contacts.
+// dragged around, and the dock holds the contacts. Like a real desktop it fills
+// the screen: from 1440px up it keeps 80% of the width, the same share as on a
+// laptop, and the type grows with the screen, capped by its height so the whole
+// desktop stays in the first view.
 export async function Desktop() {
   const [studies, posts] = await Promise.all([getCaseStudies(), getPosts()]);
 
   return (
     <section id="top" data-app="Terminal" data-app-file="~" className="overflow-hidden">
-      <Intro className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pt-10 pb-8 lg:min-h-[calc(100svh-2.75rem)] lg:pt-12">
-        <div className="grid flex-1 gap-10 lg:grid-cols-[176px_1fr_360px]">
-          <ul className="grid grid-cols-4 content-start justify-items-center gap-1 sm:grid-cols-6 lg:grid-cols-2">
+      <Intro className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pt-10 pb-8 lg:min-h-[calc(100svh-2.75rem)] lg:max-w-[max(72rem,80vw)] lg:pt-12">
+        <div className="grid flex-1 gap-10 lg:grid-cols-[96px_1fr_300px] xl:grid-cols-[minmax(176px,12vw)_1fr_clamp(360px,25vw,36rem)]">
+          <ul className="grid grid-cols-4 content-start justify-items-center gap-1 sm:grid-cols-6 lg:grid-cols-1 xl:grid-cols-2">
             {studies.map((study) => (
               <li key={study.slug} data-intro="icon">
                 <DesktopIcon href={`/work/${study.slug}`} label={study.meta.title} />
@@ -38,14 +41,17 @@ export async function Desktop() {
           </ul>
 
           <div className="order-first flex flex-col justify-end gap-5 lg:order-none lg:pb-16">
-            <p data-intro="up" className="font-mono text-sm text-balance text-muted">
+            <p data-intro="up" className="font-mono text-sm text-balance text-muted lg:text-[clamp(0.875rem,0.97vw,1.125rem)]">
               {site.roles.join(" · ")}
             </p>
-            <h1 data-intro="up" className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+            <h1
+              data-intro="up"
+              className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-[clamp(2.75rem,min(4.17vw,7.5vh),6rem)] lg:leading-none"
+            >
               I&apos;m {site.firstName}.{" "}
               <span className="block text-balance text-accent-ink">{site.headline}</span>
             </h1>
-            <p data-intro="up" className="max-w-xl text-lg text-ink-2">
+            <p data-intro="up" className="max-w-xl text-lg text-ink-2 lg:max-w-[32em] lg:text-[clamp(1.125rem,min(1.25vw,2.3vh),1.5rem)] lg:leading-[1.6]">
               {site.tagline}
             </p>
           </div>
