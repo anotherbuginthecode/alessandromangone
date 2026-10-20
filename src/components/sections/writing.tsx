@@ -7,9 +7,9 @@ export async function Writing() {
   if (posts.length === 0) return null;
 
   return (
-    <section id="writing" className="border-y border-line bg-card">
+    <section id="writing" data-app="Notes" data-app-file="~/notes">
       <div className="mx-auto max-w-6xl px-4 py-20">
-        <SectionHeading eyebrow="writing" title="Notes on leading engineers and shipping software." />
+        <SectionHeading eyebrow="writing" title="Notes from both sides of the pull request." />
         <ul className="divide-y divide-line border-y border-line">
           {posts.map(({ slug, meta }) => (
             <li key={slug}>

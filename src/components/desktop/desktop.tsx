@@ -13,7 +13,7 @@ export async function Desktop() {
   const [studies, posts] = await Promise.all([getCaseStudies(), getPosts()]);
 
   return (
-    <section id="top" className="dot-grid overflow-hidden border-b border-line">
+    <section id="top" data-app="Terminal" data-app-file="~" className="overflow-hidden">
       <Intro className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pt-10 pb-8 lg:min-h-[calc(100svh-2.75rem)] lg:pt-12">
         <div className="grid flex-1 gap-10 lg:grid-cols-[176px_1fr_360px]">
           <ul className="grid grid-cols-4 content-start justify-items-center gap-1 sm:grid-cols-6 lg:grid-cols-2">
@@ -38,13 +38,12 @@ export async function Desktop() {
           </ul>
 
           <div className="order-first flex flex-col justify-end gap-5 lg:order-none lg:pb-16">
-            <p data-intro="up" className="font-mono text-sm text-muted">
+            <p data-intro="up" className="font-mono text-sm text-balance text-muted">
               {site.roles.join(" · ")}
             </p>
             <h1 data-intro="up" className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              I&apos;m {site.firstName}.
-              <br />
-              <span className="text-accent-ink">{site.headline}</span>
+              I&apos;m {site.firstName}.{" "}
+              <span className="block text-balance text-accent-ink">{site.headline}</span>
             </h1>
             <p data-intro="up" className="max-w-xl text-lg text-ink-2">
               {site.tagline}

@@ -7,13 +7,13 @@ export const site = {
   name: "Alessandro Mangone",
   firstName: "Alessandro",
   roles: ["Engineering Manager", "Co-founder & CTO, Matcha"],
-  headline: "Engineering manager who still ships.",
+  headline: "I lead small teams that ship like big ones.",
   tagline:
-    "I lead an 18-person team at BID Company, where engineers and coding agents share one board: agents pick up the issues and open tested PRs, people review and merge. I build Matcha the same way, as co-founder and CTO.",
+    "18 engineers at BID Company. Three founders at Matcha, where I still write the code. In both, people and coding agents share one board, and people own what ships.",
   description:
-    "Alessandro Mangone is an Engineering Manager in Milan, leading an 18-person team at BID Company, running its AI adoption program and building with coding agents every day. Co-founder and CTO of Matcha.",
+    "Alessandro Mangone is a hands-on engineering leader in Milan. Engineering Manager at BID Company, leading an 18-person team and the company's AI adoption program. Co-founder and CTO of Matcha, building with coding agents every day.",
   location: "Milan, Italy",
-  status: "Open to [Tech Lead / EM] conversations",
+  status: "Open to tech lead and EM roles, startups included",
   email: "[hello@yourdomain.com]",
   links: {
     linkedin: "https://www.linkedin.com/in/alessandro-mangone-773a961a6",
@@ -75,7 +75,7 @@ export const about = {
 };
 
 export const skills = [
-  { group: "Leadership", items: ["Hiring", "1:1s & performance reviews", "Team scaling", "Delivery planning", "Technical direction"] },
+  { group: "Leadership", items: ["Technical direction", "Delivery planning", "Hiring", "Team scaling", "1:1s & performance reviews"] },
   { group: "AI", items: ["LLM integration", "RAG", "Agentic workflows", "Coding agents", "Agent skills"] },
   { group: "Engineering", items: ["TypeScript", "Python", "Node.js", "NestJS", "React", "React Native", "Next.js"] },
   { group: "Cloud & data", items: ["AWS", "Terraform", "Docker", "GitHub Actions", "PostgreSQL", "Supabase"] },

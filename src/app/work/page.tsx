@@ -12,10 +12,10 @@ export default async function WorkPage() {
   const studies = await getCaseStudies();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16">
+    <div data-app="Finder" data-app-file="~/work" className="mx-auto max-w-6xl px-4 py-16">
       <SectionHeading
         eyebrow="selected work"
-        title="Products I built, and how they got built."
+        title="Built, not just managed."
         description="Each case study follows the same arc: the insight, the challenge, the decisions, the delivery and what came out of it."
       />
       <div className="space-y-8">

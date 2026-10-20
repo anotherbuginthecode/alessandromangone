@@ -20,7 +20,7 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
   const { meta, Content } = post;
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-16">
+    <article data-app="Notes" data-app-file={`~/notes/${post.slug}.md`} className="mx-auto max-w-3xl px-4 py-16">
       <Link href="/blog" className="font-mono text-sm text-muted hover:text-accent-ink">
         ← Blog
       </Link>

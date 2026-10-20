@@ -12,7 +12,7 @@ export default async function BlogPage() {
   const posts = await getPosts();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16">
+    <div data-app="Notes" data-app-file="~/notes" className="mx-auto max-w-3xl px-4 py-16">
       <SectionHeading eyebrow="blog" title="Notes on leading engineers and shipping software." />
       {posts.length === 0 && <p className="font-mono text-sm text-muted">{"// first posts are on the way"}</p>}
       <ul className="divide-y divide-line border-y border-line empty:hidden">

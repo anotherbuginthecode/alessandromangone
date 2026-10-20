@@ -5,8 +5,12 @@ import { SectionHeading } from "../section-heading";
 // The career timeline, told as a git history.
 export function CareerLog() {
   return (
-    <section id="career" className="mx-auto max-w-6xl px-4 py-24">
-      <SectionHeading eyebrow="career" title="Every role was a commit. Here is the log." />
+    <section id="career" data-app="Terminal" data-app-file="~/career" className="mx-auto max-w-6xl px-4 py-24">
+      <SectionHeading
+        eyebrow="career"
+        title="Every role was a commit. Here is the log."
+        description="Code, then data, then cloud, then people. Each step widened the scope. None of them took the keyboard away."
+      />
       <Window title="~/career: git log --graph --oneline" dark bodyClassName="overflow-x-auto p-5 font-mono text-[13px] leading-7">
         <ol>
           {career.map((entry, i) => (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
+import { Window } from "@/components/desktop/window";
 import { Flip, gsap, MOTION_OK, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 type Column = "todo" | "progress" | "review" | "human" | "done";
@@ -111,47 +112,49 @@ export function AgentBoard({ className = "my-14" }: { className?: string }) {
 
   return (
     <figure className={className}>
-      <div ref={root} className="relative overflow-x-auto rounded-3xl bg-paper-2 p-3 sm:p-4">
-        <div className="grid min-w-[880px] grid-cols-5 gap-3">
-          {columns.map((column) => {
-            const inColumn = cards.filter((card) => place(card, tick).column === column.id);
-            return (
-              <div key={column.id} className={`rounded-xl p-2 ${column.id === "human" ? "bg-[#fef3c7]" : "bg-card/60"}`}>
-                <p className="mb-2 flex items-center justify-between px-1 font-mono text-[11px] text-muted uppercase">
-                  {column.label}
-                  <span>{inColumn.length}</span>
-                </p>
-                <ul className={`flex flex-col gap-2 ${LIST_HEIGHT}`}>
-                  {inColumn.map((card) => {
-                    const { step } = place(card, tick);
-                    return (
-                      <li
-                        key={card.id}
-                        data-card
-                        data-flip-id={card.id}
-                        className={`flex shrink-0 flex-col overflow-hidden rounded-lg border border-line bg-card p-2.5 shadow-sm ${CARD_HEIGHT}`}
-                      >
-                        <p className="line-clamp-2 text-[13px] leading-snug font-semibold">{card.title}</p>
-                        <p className="mt-auto flex flex-col items-start gap-1 pt-2 font-mono text-[10px]">
-                          <span className="rounded bg-paper-2 px-1.5 py-0.5">area:{card.area}</span>
-                          <span
-                            className={`rounded px-1.5 py-0.5 ${
-                              card.autonomy === "auto" ? "bg-[#dcfce7] text-[#166534]" : "bg-[#fef3c7] text-[#92400e]"
-                            }`}
-                          >
-                            autonomy:{card.autonomy}
-                          </span>
-                        </p>
-                        <p className="mt-1.5 truncate text-[11px] text-muted">{status(card, column.id, step)}</p>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            );
-          })}
+      <Window title="matcha · board" bodyClassName="bg-paper-2">
+        <div ref={root} className="relative overflow-x-auto p-3 sm:p-4">
+          <div className="grid min-w-[880px] grid-cols-5 gap-3">
+            {columns.map((column) => {
+              const inColumn = cards.filter((card) => place(card, tick).column === column.id);
+              return (
+                <div key={column.id} className={`rounded-xl p-2 ${column.id === "human" ? "bg-[#fef3c7]" : "bg-card/60"}`}>
+                  <p className="mb-2 flex items-center justify-between px-1 font-mono text-[11px] text-muted uppercase">
+                    {column.label}
+                    <span>{inColumn.length}</span>
+                  </p>
+                  <ul className={`flex flex-col gap-2 ${LIST_HEIGHT}`}>
+                    {inColumn.map((card) => {
+                      const { step } = place(card, tick);
+                      return (
+                        <li
+                          key={card.id}
+                          data-card
+                          data-flip-id={card.id}
+                          className={`flex shrink-0 flex-col overflow-hidden rounded-lg border border-line bg-card p-2.5 shadow-sm ${CARD_HEIGHT}`}
+                        >
+                          <p className="line-clamp-2 text-[13px] leading-snug font-semibold">{card.title}</p>
+                          <p className="mt-auto flex flex-col items-start gap-1 pt-2 font-mono text-[10px]">
+                            <span className="rounded bg-paper-2 px-1.5 py-0.5">area:{card.area}</span>
+                            <span
+                              className={`rounded px-1.5 py-0.5 ${
+                                card.autonomy === "auto" ? "bg-[#dcfce7] text-[#166534]" : "bg-[#fef3c7] text-[#92400e]"
+                              }`}
+                            >
+                              autonomy:{card.autonomy}
+                            </span>
+                          </p>
+                          <p className="mt-1.5 truncate text-[11px] text-muted">{status(card, column.id, step)}</p>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </Window>
       <figcaption className="mt-3 grid gap-2 text-[13px] text-muted sm:grid-cols-2">
         <p>
           <span className="rounded bg-[#dcfce7] px-1.5 py-0.5 font-mono text-xs text-[#166534]">autonomy:auto</span>{" "}

@@ -55,12 +55,16 @@ export function Terminal({ projects }: { projects: Project[] }) {
       case "":
         return [];
       case "help":
-        return ["whoami · ls · open <project> · blog · about · contact · clear"];
+        return ["whoami · ls · open <project> · open work · board · git log · cat about-me.md · mail · clear"];
       case "whoami":
         return [`${site.name}. ${site.roles.join(", ")}.`];
       case "ls":
         return [...projects.map((p) => `work/${p.slug}`), "blog/", "about-me.md"];
       case "open": {
+        if (args[0] === "work") {
+          router.push("/#work");
+          return ["Opening ~/work in Finder..."];
+        }
         const project = projects.find((p) => p.slug === args[0]);
         if (!project) return [`open: no such project: ${args[0] ?? ""}. Try \`ls\`.`];
         router.push(`/work/${project.slug}`);
@@ -69,15 +73,24 @@ export function Terminal({ projects }: { projects: Project[] }) {
       case "blog":
         router.push("/blog");
         return ["Opening blog/..."];
+      case "board":
+        router.push("/#how-i-work");
+        return ["Opening matcha · board..."];
+      case "git":
+        if (args[0] !== "log") return [`git: only \`git log\` works here.`];
+        router.push("/#career");
+        return ["Opening ~/career..."];
       case "about":
       case "cat":
         router.push("/#about");
-        return ["Opening about-me.md..."];
+        return ["Opening about-me.md in TextEdit..."];
+      case "mail":
       case "contact":
-        return [`email: ${site.email}`, `linkedin: ${site.links.linkedin}`];
+        router.push("/#contact");
+        return ["Opening a new message in Mail..."];
       case "sudo":
         return args.join(" ") === "hire-me"
-          ? ["Permission granted. Let's talk: type `contact`."]
+          ? ["Permission granted. Let's talk: type `mail`."]
           : ["Nice try."];
       case "clear":
         return "clear";

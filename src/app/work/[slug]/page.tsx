@@ -28,7 +28,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const next = all[(all.findIndex((s) => s.slug === slug) + 1) % all.length];
 
   return (
-    <article style={themeStyle(meta.theme)}>
+    <article data-app="Preview" data-app-file={`~/work/${slug}`} style={themeStyle(meta.theme)}>
       <ReadingProgress />
       <CaseHeader meta={meta} />
 
