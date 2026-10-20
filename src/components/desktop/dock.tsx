@@ -22,10 +22,11 @@ const apps = [
   },
 ].filter((app) => !isPlaceholder(app.href));
 
-// Contact links styled as a macOS dock.
+// Contact links styled as a macOS dock. No overflow clipping: the hover lift and
+// the labels must show above the dock, and six icons fit even on a phone.
 export function Dock() {
   return (
-    <nav aria-label="Contact" className="mx-auto w-fit max-w-full overflow-x-auto rounded-2xl border border-line bg-card/70 p-2 shadow-lg backdrop-blur">
+    <nav aria-label="Contact" className="mx-auto w-fit max-w-full rounded-2xl border border-line bg-card/70 p-2 shadow-lg backdrop-blur">
       <ul className="flex items-end gap-2">
         {apps.map((app) => (
           <li key={app.label} className="group relative">
