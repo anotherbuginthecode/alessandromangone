@@ -1,6 +1,6 @@
 import { getCaseStudies } from "@/lib/content";
+import { Finder } from "../desktop/finder";
 import { SectionHeading } from "../section-heading";
-import { WorkPoster } from "../work-poster";
 
 export async function SelectedWork() {
   const studies = await getCaseStudies();
@@ -12,11 +12,7 @@ export async function SelectedWork() {
         title="Built, not just managed."
         description="A dating app that turns matches into real dates, a quiz game shipped in seven days, a training program for more than 600 people. Each one is a decision about what to build, what to defer and who, or what, writes the code."
       />
-      <div className="space-y-8">
-        {studies.map((study) => (
-          <WorkPoster key={study.slug} {...study} />
-        ))}
-      </div>
+      <Finder studies={studies} />
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { Intro } from "@/components/motion/intro";
 import type { CaseStudyMeta } from "@/lib/content";
 import { CaseCover } from "./case-cover";
@@ -6,8 +7,10 @@ import { CaseCover } from "./case-cover";
 const label = "font-mono text-[11px] tracking-widest text-muted uppercase";
 
 // Case study header: tags, title, intro and facts on the page background,
-// then the cover in the project's own colors.
-export function CaseHeader({ meta }: { meta: CaseStudyMeta }) {
+// then the cover in the project's own colors. The cover is the shared element
+// that the Finder preview, the poster and the next-case banner morph into, so it
+// has no intro animation of its own.
+export function CaseHeader({ slug, meta }: { slug: string; meta: CaseStudyMeta }) {
   return (
     <header>
       <Intro className="mx-auto max-w-6xl px-4 pt-10">
@@ -62,11 +65,13 @@ export function CaseHeader({ meta }: { meta: CaseStudyMeta }) {
           ))}
         </dl>
 
-        <div data-intro="pop" className="mt-10 overflow-hidden rounded-3xl bg-[var(--cs-bg)] px-6 py-12 text-[var(--cs-fg)] sm:px-14 sm:py-16">
-          <div className="mx-auto max-w-4xl">
-            <CaseCover cover={meta.cover} priority />
+        <ViewTransition name={`cover-${slug}`} share="morph" default="none">
+          <div className="mt-10 overflow-hidden rounded-3xl bg-[var(--cs-bg)] px-6 py-12 text-[var(--cs-fg)] sm:px-14 sm:py-16">
+            <div className="mx-auto max-w-4xl">
+              <CaseCover cover={meta.cover} priority />
+            </div>
           </div>
-        </div>
+        </ViewTransition>
       </Intro>
     </header>
   );

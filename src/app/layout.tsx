@@ -25,7 +25,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    // data-scroll-behavior: anchors scroll smoothly, but page navigations jump to the top
+    // at once, so a case study's cover morphs into place instead of off screen.
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col font-sans">
         <MenuBar />
         <main className="flex-1">{children}</main>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import { StatsPanel } from "@/components/case-study/blocks";
 import { CaseHeader } from "@/components/case-study/case-header";
@@ -30,7 +31,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   return (
     <article data-app="Preview" data-app-file={`~/work/${slug}`} style={themeStyle(meta.theme)}>
       <ReadingProgress />
-      <CaseHeader meta={meta} />
+      <CaseHeader slug={slug} meta={meta} />
 
       <Reveal className="mx-auto max-w-6xl px-4 pt-4 pb-24">
         <Content />
@@ -42,21 +43,24 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       </Reveal>
 
       {next && next.slug !== slug && (
-        <Link
-          href={`/work/${next.slug}`}
-          style={themeStyle(next.meta.theme)}
-          className="group block bg-[var(--cs-bg)] text-[var(--cs-fg)]"
-        >
-          <div className="mx-auto flex max-w-6xl items-end justify-between gap-6 px-4 py-16 sm:py-20">
-            <div>
-              <p className="font-mono text-xs uppercase opacity-60">Next case study</p>
-              <p className="mt-2 text-5xl font-semibold tracking-tighter sm:text-7xl">{next.meta.title}</p>
+        <ViewTransition name={`cover-${next.slug}`} share="morph" default="none">
+          <Link
+            href={`/work/${next.slug}`}
+            prefetch
+            style={themeStyle(next.meta.theme)}
+            className="group block bg-[var(--cs-bg)] text-[var(--cs-fg)]"
+          >
+            <div className="mx-auto flex max-w-6xl items-end justify-between gap-6 px-4 py-16 sm:py-20">
+              <div>
+                <p className="font-mono text-xs uppercase opacity-60">Next case study</p>
+                <p className="mt-2 text-5xl font-semibold tracking-tighter sm:text-7xl">{next.meta.title}</p>
+              </div>
+              <span className="text-5xl text-[var(--cs-accent)] transition-transform group-hover:translate-x-2" aria-hidden>
+                →
+              </span>
             </div>
-            <span className="text-5xl text-[var(--cs-accent)] transition-transform group-hover:translate-x-2" aria-hidden>
-              →
-            </span>
-          </div>
-        </Link>
+          </Link>
+        </ViewTransition>
       )}
     </article>
   );
