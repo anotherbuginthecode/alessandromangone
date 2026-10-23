@@ -27,7 +27,7 @@ export function Footer() {
           </p>
           <div className={field}>
             <span className={fieldLabel}>Subject:</span>
-            <h2 className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">Let&apos;s put your AI to work.</h2>
+            <h2 className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">Let&apos;s build something that works without you.</h2>
           </div>
           <div className="px-5 py-6">
             <p className="max-w-xl text-ink-2">

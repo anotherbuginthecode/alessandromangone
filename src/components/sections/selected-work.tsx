@@ -10,7 +10,7 @@ export async function SelectedWork() {
       <SectionHeading
         eyebrow="selected work"
         title="Show, don't prompt."
-        description="A dating app mostly written by coding agents, a quiz game the agents audited months later, and a training program that put generative AI in the hands of 600+ people. Three answers to the same question: what should the AI do, and what should a human still own?"
+        description="A dating app mostly written by coding agents, a quiz game the agents audited months later, and a training program that put generative AI in the hands of 600+ people. Three answers to the same question: what can run without you, and what should a human still own?"
       />
       <Finder studies={studies} />
     </section>

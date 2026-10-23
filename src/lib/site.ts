@@ -7,11 +7,11 @@ export const site = {
   name: "Alessandro Mangone",
   firstName: "Alessandro",
   roles: ["Applied AI Architect", "Co-founder & CTO, Matcha"],
-  headline: "I teach AI to do actual work.",
+  headline: "I build systems that work without you.",
   tagline:
-    "Six years getting LLMs out of the demo and into production for Italian banks, insurers and retailers. At Matcha, where I'm co-founder and CTO, coding agents write most of the code. I\u00a0review all of it. Trust issues.",
+    "Six years getting LLMs into production for Italian banks, insurers and retailers. At Matcha, where I'm co-founder and CTO, coding agents pick up their own issues and write most of the code. Without you, yes. Without rules, never.",
   description:
-    "Alessandro Mangone is an applied AI architect in Milan: six years taking LLM systems from discovery to production for Italian banks, insurers and retailers. Engineering Lead of an 18-person team at BID Company and of its AI adoption program. Co-founder and CTO of Matcha, built with coding agents.",
+    "Alessandro Mangone is an applied AI architect in Milan who builds systems that work without you: six years taking LLM systems from discovery to production for Italian banks, insurers and retailers. Engineering Lead of an 18-person team at BID Company and of its AI adoption program. Co-founder and CTO of Matcha, built with coding agents.",
   location: "Milan, Italy",
   status: "Open to applied AI, FDE and AI architect roles",
   email: "[hello@yourdomain.com]",
