@@ -34,7 +34,7 @@ export function CaseHeader({ slug, meta }: { slug: string; meta: CaseStudyMeta }
         <h1 data-intro="up" className="mt-5 text-6xl leading-[0.95] font-semibold tracking-tighter text-balance sm:text-8xl">
           {meta.title}
         </h1>
-        <p data-intro="up" className="mt-6 max-w-[760px] text-xl leading-relaxed text-muted">
+        <p data-intro="up" className="mt-6 max-w-[52rem] text-xl leading-relaxed text-muted">
           {meta.intro ?? meta.summary}
         </p>
 
