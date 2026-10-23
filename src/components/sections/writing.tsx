@@ -12,7 +12,7 @@ export async function Writing() {
   return (
     <section id="writing" data-app="Notes" data-app-file="~/notes">
       <div className="mx-auto max-w-6xl px-4 py-20">
-        <SectionHeading eyebrow="writing" title="Notes from both sides of the pull request." />
+        <SectionHeading eyebrow="writing" title="Notes from both sides of the prompt." />
         <Window title="~/notes" bodyClassName="grid md:grid-cols-[300px_1fr]">
           <ul className="divide-y divide-line bg-paper/60 md:border-r md:border-line">
             {posts.map(({ slug, meta }, i) => (

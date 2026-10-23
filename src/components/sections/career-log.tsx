@@ -9,7 +9,7 @@ export function CareerLog() {
       <SectionHeading
         eyebrow="career"
         title="Every role was a commit. Here is the log."
-        description="Code, then data, then cloud, then people. Each step widened the scope. None of them took the keyboard away."
+        description="Code, then data, then cloud, then people, then models. Each step widened the scope. None of them took the keyboard away."
       />
       <Window title="~/career: git log --graph --oneline" dark bodyClassName="overflow-x-auto p-5 font-mono text-[13px] leading-7">
         <ol>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { isPlaceholder, site } from "@/lib/site";
 
 const claudePrompt = encodeURIComponent(
-  `Tell me about ${site.name}, ${site.roles.join(" and ")}. What kind of engineering leader is ${site.firstName}?`,
+  `Tell me about ${site.name}, ${site.roles.join(" and ")}. Is ${site.firstName} any good at applied AI?`,
 );
 
 // Brand icons live in public/app-icons (Iconify "logos" set, CC0; PDF from "vscode-icons", MIT).

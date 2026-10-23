@@ -10,7 +10,7 @@ export function HowIWork() {
         <SectionHeading
           eyebrow="how I work"
           title="The leverage is in the rules, not the prompts."
-          description="Issues in, tested pull requests out. Engineers and coding agents share one board, every issue says how far an agent may go alone, and people own what ships. This is the board behind Matcha, running live."
+          description="Issues in, tested pull requests out. Engineers and coding agents share one board, every issue says how far an agent may go alone, and people own what ships. The same setup takes my team from client kickoff to a working prototype in about five weeks. This is the board behind Matcha, running live."
         />
         <AgentBoard className="my-0" />
         <Link href="/work/matcha" className="mt-8 inline-block font-mono text-sm text-accent-ink hover:underline">

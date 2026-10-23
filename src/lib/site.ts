@@ -6,14 +6,14 @@ export const isPlaceholder = (value: string) => value.includes("[");
 export const site = {
   name: "Alessandro Mangone",
   firstName: "Alessandro",
-  roles: ["Engineering Manager", "Co-founder & CTO, Matcha"],
-  headline: "I lead small teams that ship like big ones.",
+  roles: ["Applied AI Architect", "Co-founder & CTO, Matcha"],
+  headline: "I teach AI to do actual work.",
   tagline:
-    "18 engineers at BID Company. Three founders at Matcha, where I still write the code. In both, people and coding agents share one board, and people own what ships.",
+    "Six years getting LLMs out of the demo and into production for Italian banks, insurers and retailers. At Matcha, where I'm co-founder and CTO, coding agents write most of the code. I\u00a0review all of it. Trust issues.",
   description:
-    "Alessandro Mangone is a hands-on engineering leader in Milan. Engineering Manager at BID Company, leading an 18-person team and the company's AI adoption program. Co-founder and CTO of Matcha, building with coding agents every day.",
+    "Alessandro Mangone is an applied AI architect in Milan: six years taking LLM systems from discovery to production for Italian banks, insurers and retailers. Engineering Lead of an 18-person team at BID Company and of its AI adoption program. Co-founder and CTO of Matcha, built with coding agents.",
   location: "Milan, Italy",
-  status: "Open to tech lead and EM roles, startups included",
+  status: "Open to applied AI, FDE and AI architect roles",
   email: "[hello@yourdomain.com]",
   links: {
     linkedin: "https://www.linkedin.com/in/alessandro-mangone-773a961a6",
@@ -24,9 +24,10 @@ export const site = {
 };
 
 export const now = [
+  { label: "Day job", value: "LLM systems for Italian enterprises, from demo to production" },
   { label: "Building", value: "Matcha's MVP, getting ready for the Milan launch" },
+  { label: "Tinkering", value: "Fiabella, bedtime stories written by an agentic workflow" },
   { label: "Reading", value: "[Book title]" },
-  { label: "Listening", value: "[Song or album]" },
 ].filter((item) => !isPlaceholder(item.value));
 
 export const career = [
@@ -35,15 +36,15 @@ export const career = [
     year: "2026",
     role: "Co-founder & CTO",
     company: "Matcha",
-    note: "architecture and code end to end, with a board of coding agents",
+    note: "architecture and rules by me, most of the code by a board of coding agents",
     refs: "HEAD -> matcha",
   },
   {
     hash: "8be04d7",
     year: "2024",
-    role: "Engineering Manager",
+    role: "Engineering Lead",
     company: "BID Company",
-    note: "18 engineers, grown from 3; the company's AI adoption program",
+    note: "LLM systems in production for banks and retailers; team grown from 3 to 18; the AI adoption program",
     refs: "main",
   },
   {
@@ -70,14 +71,19 @@ export const career = [
 ];
 
 export const about = {
-  then: "I started in 2019 as a freelance full-stack developer, then moved through data consulting and cloud engineering before taking on my first team in 2024. Each step widened the scope: from my own code, to the infrastructure, to the people who build on it.",
-  now: "I lead an 18-person engineering team at BID Company, own delivery for enterprise clients and run the company's AI adoption program. I'm also co-founder and CTO of Matcha, where I write the code with a board of coding agents.",
+  then: "I started in 2019 as a freelance full-stack developer, then moved through data consulting and cloud engineering at BID Company before taking on a team. Each step widened the scope: my own code, then the infrastructure, then the people who build on it. Now the models build with us.",
+  now: "I'm Engineering Lead at BID Company: 18 engineers, grown from 3, and a lot of time with Italian enterprises, from discovery with the C-level to LLM systems in production. One of them turns up to an hour of balance sheet work into a 7-minute draft, with 95.4% of line items found. I also built Chatto, a RAG platform that convinced three paying customers. After hours I'm co-founder and CTO of Matcha.",
 };
 
 export const skills = [
+  {
+    group: "Applied AI",
+    items: ["RAG", "LLM evaluation (RAGAS)", "Guardrails", "Deterministic AI workflows", "Agentic workflows", "Coding agents", "Semantic caching"],
+  },
+  { group: "In the field", items: ["Technical discovery", "Pre-sales scoping", "Solution design", "Workshops & enablement", "Executive communication"] },
   { group: "Leadership", items: ["Technical direction", "Delivery planning", "Hiring", "Team scaling", "1:1s & performance reviews"] },
-  { group: "AI", items: ["LLM integration", "RAG", "Agentic workflows", "Coding agents", "Agent skills"] },
-  { group: "Engineering", items: ["TypeScript", "Python", "Node.js", "NestJS", "React", "React Native", "Next.js"] },
-  { group: "Cloud & data", items: ["AWS", "Terraform", "Docker", "GitHub Actions", "PostgreSQL", "Supabase"] },
+  { group: "Engineering", items: ["Python", "FastAPI", "TypeScript", "NestJS", "Next.js", "React Native", "PostgreSQL"] },
+  { group: "Cloud & data", items: ["AWS", "Terraform", "Elasticsearch", "Docker", "GitHub Actions", "Supabase"] },
+  { group: "Research", items: ["ECAI 2025 co-author", "MSc thesis: multimodal emotion analysis"] },
   { group: "Certified", items: ["AWS Solutions Architect Associate", "AWS AI Practitioner"] },
 ];

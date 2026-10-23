@@ -9,8 +9,8 @@ export async function SelectedWork() {
     <section id="work" data-app="Finder" data-app-file="~/work" className="mx-auto max-w-6xl px-4 py-24">
       <SectionHeading
         eyebrow="selected work"
-        title="Built, not just managed."
-        description="A dating app that turns matches into real dates, a quiz game shipped in seven days, a training program for more than 600 people. Each one is a decision about what to build, what to defer and who, or what, writes the code."
+        title="Show, don't prompt."
+        description="A dating app mostly written by coding agents, a quiz game the agents audited months later, and a training program that put generative AI in the hands of 600+ people. Three answers to the same question: what should the AI do, and what should a human still own?"
       />
       <Finder studies={studies} />
     </section>

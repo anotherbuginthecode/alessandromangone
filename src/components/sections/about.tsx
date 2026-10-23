@@ -5,7 +5,7 @@ import { SectionHeading } from "../section-heading";
 export function About() {
   return (
     <section id="about" data-app="TextEdit" data-app-file="about-me.md" className="mx-auto max-w-6xl px-4 py-20">
-      <SectionHeading eyebrow="about" title="Engineer first. Lead by choice." />
+      <SectionHeading eyebrow="about" title="The short version. Human-written, promise." />
       <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
         <Window title="about-me.md" bodyClassName="space-y-6 p-6">
           <div>

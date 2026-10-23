@@ -15,8 +15,8 @@ export default async function WorkPage() {
     <div data-app="Finder" data-app-file="~/work" className="mx-auto max-w-6xl px-4 py-16">
       <SectionHeading
         eyebrow="selected work"
-        title="Built, not just managed."
-        description="Each case study follows the same arc: the insight, the challenge, the decisions, the delivery and what came out of it."
+        title="Show, don't prompt."
+        description="Three projects, three ways to split the work between people and AI. Each one follows the same arc: the insight, the challenge, the decisions, the delivery and what came out of it."
       />
       <div className="space-y-8">
         {studies.map((study) => (

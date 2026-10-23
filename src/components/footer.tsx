@@ -27,12 +27,12 @@ export function Footer() {
           </p>
           <div className={field}>
             <span className={fieldLabel}>Subject:</span>
-            <h2 className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">Let&apos;s build a team that ships.</h2>
+            <h2 className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">Let&apos;s put your AI to work.</h2>
           </div>
           <div className="px-5 py-6">
             <p className="max-w-xl text-ink-2">
-              Hiring a tech lead or an engineering manager, or looking for someone to lead a small team that has to ship?
-              Tell me about it.
+              Got an LLM stuck in demo mode? Hiring an applied AI or forward deployed engineer, an AI architect, or a tech
+              lead who still writes code? Tell me about it.
             </p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {channels.map((channel) => (

@@ -1,21 +1,21 @@
 # alessandromangone
 
-Personal site and blog of Alessandro Mangone, Engineering Manager and co-founder & CTO of Matcha.
+Personal site and blog of Alessandro Mangone, applied AI architect and co-founder & CTO of Matcha.
 
 Live at [alessandromangone.vercel.app](https://alessandromangone.vercel.app). Every push to `main` deploys to production on Vercel.
 
 ## Concept
 
-The home page is a developer's desktop. It boots in on load, the terminal types `whoami` by itself and works as navigation (`help`, `ls`, `open matcha`, `contact`), the windows can be dragged by their title bar, folders open the case studies and the dock holds the contact links. Below it:
+The whole home page is one developer's desktop, and the menu bar names the app in front as you scroll (`data-app` on each section). The hero boots in on load, the terminal types `whoami` by itself and works as navigation (`help`, `ls`, `open matcha`, `git log`, `mail`), the windows can be dragged by their title bar, folders open the case studies and the dock holds the contact links. Below it:
 
-1. **Selected work**: each case study as a full-width poster in the project's own colors.
-2. **How I work**: the agent board from Matcha, running live.
+1. **Selected work**: a Finder window in Gallery view (list view on phones). Its preview morphs into the case study cover.
+2. **How I work**: the agent board from Matcha, running live in an app window.
 3. **Career**: the timeline as a `git log`.
-4. **Writing**: shown only once a post is published.
+4. **Writing**: a notes window, shown only once a post is published.
 5. **About**: `about-me.md` and `stack.json`.
-6. **Contact**: footer on every page.
+6. **Contact**: a Mail message in the footer of every page.
 
-Case studies follow one arc (insight, challenge, decisions, delivery, results, closing) and use animated building blocks: a layered flow diagram, a scroll-driven state machine, a timeline and the agent board.
+Case studies follow one arc (insight, challenge, decisions, delivery, results, closing) and use animated building blocks: a layered flow diagram, a scroll-driven state machine, a board of real screens and the agent board.
 
 Reference analysis (in Italian): [`docs/analisi-riferimenti.md`](docs/analisi-riferimenti.md).
 

@@ -42,7 +42,13 @@ export async function Desktop() {
 
           <div className="order-first flex flex-col justify-end gap-5 lg:order-none lg:pb-16">
             <p data-intro="up" className="font-mono text-sm text-balance text-muted lg:text-[clamp(0.875rem,0.97vw,1.125rem)]">
-              {site.roles.join(" · ")}
+              {/* Each role stays on one line, so a narrow screen breaks at the separator. */}
+              {site.roles.map((role, i) => (
+                <span key={role}>
+                  {i > 0 && " · "}
+                  <span className="whitespace-nowrap">{role}</span>
+                </span>
+              ))}
             </p>
             <h1
               data-intro="up"
