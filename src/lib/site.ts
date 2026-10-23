@@ -9,9 +9,9 @@ export const site = {
   roles: ["Applied AI Architect", "Co-founder & CTO, Matcha"],
   headline: "I build systems that work without you.",
   tagline:
-    "Six years getting LLMs into production for Italian banks, insurers and retailers. At Matcha, where I'm co-founder and CTO, coding agents pick up their own issues and write most of the code. Without you, yes. Without rules, never.",
+    "Six years of projects for Italian banks, insurers and retailers. Lately, that means AI agents and systems that make it out of the demo and into production. At Matcha, where I'm CTO, coding agents pick up their own issues and write most of the code. Without\u00a0you,\u00a0yes. Without\u00a0rules,\u00a0never.",
   description:
-    "Alessandro Mangone is an applied AI architect in Milan who builds systems that work without you: six years taking LLM systems from discovery to production for Italian banks, insurers and retailers. Engineering Lead of an 18-person team at BID Company and of its AI adoption program. Co-founder and CTO of Matcha, built with coding agents.",
+    "Alessandro Mangone is an applied AI architect in Milan who builds systems that work without you: six years of projects for Italian banks, insurers and retailers, now taking AI agents and systems from discovery to production. Engineering Lead of an 18-person team at BID Company and of its AI adoption program. Co-founder and CTO of Matcha, built with coding agents.",
   location: "Milan, Italy",
   status: "Open to applied AI, FDE and AI architect roles",
   email: "[hello@yourdomain.com]",
@@ -24,7 +24,7 @@ export const site = {
 };
 
 export const now = [
-  { label: "Day job", value: "LLM systems for Italian enterprises, from demo to production" },
+  { label: "Day job", value: "AI agents and systems for Italian enterprises, from demo to production" },
   { label: "Building", value: "Matcha's MVP, getting ready for the Milan launch" },
   { label: "Tinkering", value: "Fiabella, bedtime stories written by an agentic workflow" },
   { label: "Reading", value: "[Book title]" },
@@ -44,7 +44,7 @@ export const career = [
     year: "2024",
     role: "Engineering Lead",
     company: "BID Company",
-    note: "LLM systems in production for banks and retailers; team grown from 3 to 18; the AI adoption program",
+    note: "AI systems in production for banks and retailers; team grown from 3 to 18; the AI adoption program",
     refs: "main",
   },
   {
@@ -72,13 +72,13 @@ export const career = [
 
 export const about = {
   then: "I started in 2019 as a freelance full-stack developer, then moved through data consulting and cloud engineering at BID Company before taking on a team. Each step widened the scope: my own code, then the infrastructure, then the people who build on it. Now the models build with us.",
-  now: "I'm Engineering Lead at BID Company: 18 engineers, grown from 3, and a lot of time with Italian enterprises, from discovery with the C-level to LLM systems in production. One of them turns up to an hour of balance sheet work into a 7-minute draft, with 95.4% of line items found. I also built Chatto, a RAG platform that convinced three paying customers. After hours I'm co-founder and CTO of Matcha.",
+  now: "I'm Engineering Lead at BID Company: 18 engineers, grown from 3, and a lot of time with Italian enterprises, from discovery with the C-level to AI systems in production. One of them turns up to an hour of balance sheet work into a 7-minute draft, with 95.4% of line items found. I also built Chatto, a RAG platform that convinced three paying customers. After hours I'm co-founder and CTO of Matcha.",
 };
 
 export const skills = [
   {
     group: "Applied AI",
-    items: ["RAG", "LLM evaluation (RAGAS)", "Guardrails", "Deterministic AI workflows", "Agentic workflows", "Coding agents", "Semantic caching"],
+    items: ["RAG", "AI evaluation (RAGAS)", "Guardrails", "Deterministic AI workflows", "Agentic workflows", "Coding agents", "Semantic caching"],
   },
   { group: "In the field", items: ["Technical discovery", "Pre-sales scoping", "Solution design", "Workshops & enablement", "Executive communication"] },
   { group: "Leadership", items: ["Technical direction", "Delivery planning", "Hiring", "Team scaling", "1:1s & performance reviews"] },

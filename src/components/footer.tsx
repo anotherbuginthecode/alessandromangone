@@ -31,7 +31,7 @@ export function Footer() {
           </div>
           <div className="px-5 py-6">
             <p className="max-w-xl text-ink-2">
-              Got an LLM stuck in demo mode? Hiring an applied AI or forward deployed engineer, an AI architect, or a tech
+              Got an AI agent stuck in demo mode? Hiring an applied AI or forward deployed engineer, an AI architect, or a tech
               lead who still writes code? Tell me about it.
             </p>
             <ul className="mt-6 flex flex-wrap gap-2">
